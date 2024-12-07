@@ -1,0 +1,6 @@
+F:/CSC8503 Code 2024/CMakeFiles/ALL_BUILD.dir
+F:/CSC8503 Code 2024/CMakeFiles/ZERO_CHECK.dir
+F:/CSC8503 Code 2024/NCLCoreClasses/CMakeFiles/NCLCoreClasses.dir
+F:/CSC8503 Code 2024/CSC8503CoreClasses/CMakeFiles/CSC8503CoreClasses.dir
+F:/CSC8503 Code 2024/OpenGLRendering/CMakeFiles/OpenGLRendering.dir
+F:/CSC8503 Code 2024/CSC8503/CMakeFiles/CSC8503.dir
