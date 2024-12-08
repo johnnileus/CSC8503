@@ -1,285 +1,285 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\CMakeFiles\CSC8503CoreClasses.dir\cmake_pch.cxx">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\CMakeFiles\CSC8503CoreClasses.dir\cmake_pch.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\Debug.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\Debug.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\GameObject.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\GameObject.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\GameWorld.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\GameWorld.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\RenderObject.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\RenderObject.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\Transform.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\Transform.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\Debug.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\GameObject.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\GameWorld.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\GameWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\RenderObject.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\RenderObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\Transform.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourAction.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\BehaviourAction.h">
       <Filter>AI\Behaviour Trees</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourNode.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\BehaviourNode.h">
       <Filter>AI\Behaviour Trees</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourNodeWithChildren.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\BehaviourNodeWithChildren.h">
       <Filter>AI\Behaviour Trees</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourSelector.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\BehaviourSelector.h">
       <Filter>AI\Behaviour Trees</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourSelector.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\BehaviourSelector.cpp">
       <Filter>AI\Behaviour Trees</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourSequence.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\BehaviourSequence.h">
       <Filter>AI\Behaviour Trees</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\BehaviourSequence.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\BehaviourSequence.cpp">
       <Filter>AI\Behaviour Trees</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PushdownMachine.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PushdownMachine.h">
       <Filter>AI\Pushdown Automata</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PushdownMachine.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PushdownMachine.cpp">
       <Filter>AI\Pushdown Automata</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PushdownState.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PushdownState.h">
       <Filter>AI\Pushdown Automata</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PushdownState.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PushdownState.cpp">
       <Filter>AI\Pushdown Automata</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\State.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\State.h">
       <Filter>AI\State Machine</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\StateMachine.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\StateMachine.h">
       <Filter>AI\State Machine</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\StateMachine.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\StateMachine.cpp">
       <Filter>AI\State Machine</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\StateTransition.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\StateTransition.h">
       <Filter>AI\State Machine</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NavigationGrid.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NavigationGrid.h">
       <Filter>AI\Pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NavigationGrid.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NavigationGrid.cpp">
       <Filter>AI\Pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NavigationMesh.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NavigationMesh.cpp">
       <Filter>AI\Pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NavigationMesh.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NavigationMesh.h">
       <Filter>AI\Pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NavigationMap.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NavigationMap.h">
       <Filter>AI\Pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NavigationPath.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NavigationPath.h">
       <Filter>AI\Pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\AABBVolume.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\AABBVolume.h">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\CapsuleVolume.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\CapsuleVolume.h">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\CapsuleVolume.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\CapsuleVolume.cpp">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\CollisionDetection.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\CollisionDetection.h">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\CollisionDetection.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\CollisionDetection.cpp">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\CollisionVolume.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\CollisionVolume.h">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\OBBVolume.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\OBBVolume.h">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\QuadTree.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\QuadTree.h">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\QuadTree.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\QuadTree.cpp">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\Ray.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\Ray.h">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\SphereVolume.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\SphereVolume.h">
       <Filter>Collision Detection</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\GameClient.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\GameClient.h">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\GameClient.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\GameClient.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\GameServer.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\GameServer.h">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\GameServer.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\GameServer.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NetworkBase.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NetworkBase.h">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NetworkBase.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NetworkBase.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NetworkObject.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NetworkObject.h">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NetworkObject.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NetworkObject.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NetworkState.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NetworkState.h">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\NetworkState.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\NetworkState.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\Constraint.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\Constraint.h">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PositionConstraint.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PositionConstraint.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PositionConstraint.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PositionConstraint.h">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\OrientationConstraint.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\OrientationConstraint.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\OrientationConstraint.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\OrientationConstraint.h">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PhysicsObject.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PhysicsObject.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PhysicsObject.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PhysicsObject.h">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PhysicsSystem.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PhysicsSystem.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\PhysicsSystem.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\PhysicsSystem.h">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\callbacks.c">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\callbacks.c">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\list.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\list.h">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\list.c">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\list.c">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\protocol.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\protocol.h">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\protocol.c">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\protocol.c">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\win32.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\win32.h">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\win32.c">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\win32.c">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\enet.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\enet.h">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\time.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\time.h">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\types.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\types.h">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\utility.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\utility.h">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\compress.c">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\compress.c">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\host.c">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\host.c">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\packet.c">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\packet.c">
       <Filter>eNet</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\enet\peer.c">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\enet\peer.c">
       <Filter>eNet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\CMakeFiles\CSC8503CoreClasses.dir\Debug\cmake_pch.hxx">
+    <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\CMakeFiles\CSC8503CoreClasses.dir\Debug\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\CMakeFiles\CSC8503CoreClasses.dir\Release\cmake_pch.hxx">
+    <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\CMakeFiles\CSC8503CoreClasses.dir\Release\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="F:\CSC8503 Code 2024\CSC8503CoreClasses\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503CoreClasses\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="AI">
-      <UniqueIdentifier>{FF207F5D-3EBD-3502-923B-384080740417}</UniqueIdentifier>
+      <UniqueIdentifier>{7380F0AC-3824-3C13-B15A-26A9FDDB5027}</UniqueIdentifier>
     </Filter>
     <Filter Include="AI\Behaviour Trees">
-      <UniqueIdentifier>{C7F8CAF3-A0A5-3E08-94D7-9C336F0CA49B}</UniqueIdentifier>
+      <UniqueIdentifier>{99F502C3-8B06-398B-927E-5352CB2209F1}</UniqueIdentifier>
     </Filter>
     <Filter Include="AI\Pathfinding">
-      <UniqueIdentifier>{D1FFC5B6-4997-3370-8C25-2BDCBD1CDD74}</UniqueIdentifier>
+      <UniqueIdentifier>{5B39902E-5D59-317D-AE49-1518E3CB5626}</UniqueIdentifier>
     </Filter>
     <Filter Include="AI\Pushdown Automata">
-      <UniqueIdentifier>{B42FF005-CD0F-3D1A-9B5D-C1CF86C2AD86}</UniqueIdentifier>
+      <UniqueIdentifier>{4CA8215E-8F49-3411-8BED-0D55E7453C76}</UniqueIdentifier>
     </Filter>
     <Filter Include="AI\State Machine">
-      <UniqueIdentifier>{2ABD5C1B-7CBC-38BC-ABC4-E875E94C126C}</UniqueIdentifier>
+      <UniqueIdentifier>{D7F7E75B-AC88-30E2-8EA4-3DD5D557C320}</UniqueIdentifier>
     </Filter>
     <Filter Include="Collision Detection">
-      <UniqueIdentifier>{445128E2-B240-3219-8379-9C576086DE5A}</UniqueIdentifier>
+      <UniqueIdentifier>{8E86C334-773A-31D2-A7AD-5431EAA2A1FC}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{6E283858-8B50-3CDB-8A43-8BD7847A12E9}</UniqueIdentifier>
+      <UniqueIdentifier>{04030913-427B-3B14-875F-D6B330D9DF0D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Networking">
-      <UniqueIdentifier>{5F419EFC-04D7-3BBD-B5D0-BDA7B949BA18}</UniqueIdentifier>
+      <UniqueIdentifier>{BF0DA012-6644-31E7-B776-E6024F4FB01F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Physics">
-      <UniqueIdentifier>{B0AD2A11-9456-3BE8-837E-7AC9815C2152}</UniqueIdentifier>
+      <UniqueIdentifier>{D0301D11-9675-3EE3-B7F7-8D474758B0BF}</UniqueIdentifier>
     </Filter>
     <Filter Include="Precompile Header File">
-      <UniqueIdentifier>{D15C3B90-4024-3955-9B9E-0C355A6BD1C0}</UniqueIdentifier>
+      <UniqueIdentifier>{542DDB5D-57F9-3668-B384-33C97AE04544}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{42AF5E80-C96F-384B-BC20-1E284C55E19F}</UniqueIdentifier>
+      <UniqueIdentifier>{C6E25762-DD24-3015-9718-6A79FE193BDE}</UniqueIdentifier>
     </Filter>
     <Filter Include="eNet">
-      <UniqueIdentifier>{F9F46569-3450-3806-B630-FC64FE63420B}</UniqueIdentifier>
+      <UniqueIdentifier>{8718E33F-E246-3ACD-BE40-06B96584F70F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

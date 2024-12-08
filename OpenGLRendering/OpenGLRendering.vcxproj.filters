@@ -1,69 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\cmake_pch.cxx">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\cmake_pch.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLTexture.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLTexture.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLShader.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLShader.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLRenderer.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLRenderer.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLMesh.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLMesh.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLComputeShader.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLComputeShader.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLTexture.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLShader.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLRenderer.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLMesh.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\OGLComputeShader.cpp">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\OGLComputeShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\glad\gl.h">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\glad\gl.h">
       <Filter>GLAD</Filter>
     </ClCompile>
-    <ClCompile Include="F:\CSC8503 Code 2024\OpenGLRendering\glad\gl.c">
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\glad\gl.c">
       <Filter>GLAD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="F:\CSC8503 Code 2024\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\Debug\cmake_pch.hxx">
+    <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\Debug\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="F:\CSC8503 Code 2024\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\Release\cmake_pch.hxx">
+    <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\CMakeFiles\OpenGLRendering.dir\Release\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="F:\CSC8503 Code 2024\OpenGLRendering\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Goines\Documents\GitHub\CSC8503\OpenGLRendering\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GLAD">
-      <UniqueIdentifier>{BDD023A8-B5F1-36C1-B5F6-2F09228F2E05}</UniqueIdentifier>
+      <UniqueIdentifier>{7EEEC730-4BA5-362E-B726-A7BAAFC0CFC2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{6E283858-8B50-3CDB-8A43-8BD7847A12E9}</UniqueIdentifier>
+      <UniqueIdentifier>{04030913-427B-3B14-875F-D6B330D9DF0D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Precompile Header File">
-      <UniqueIdentifier>{D15C3B90-4024-3955-9B9E-0C355A6BD1C0}</UniqueIdentifier>
+      <UniqueIdentifier>{542DDB5D-57F9-3668-B384-33C97AE04544}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{42AF5E80-C96F-384B-BC20-1E284C55E19F}</UniqueIdentifier>
+      <UniqueIdentifier>{C6E25762-DD24-3015-9718-6A79FE193BDE}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

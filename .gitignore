@@ -9,3 +9,7 @@
 /.vs
 /Build
 /out/build/x64-Debug
+CSC8503/CSC8503.dir/Debug/cmake_pch.pch
+CSC8503CoreClasses/CSC8503CoreClasses.dir/Debug/cmake_pch.pch
+NCLCoreClasses/NCLCoreClasses.dir/Debug/cmake_pch.pch
+OpenGLRendering/OpenGLRendering.dir/Debug/cmake_pch.pch

@@ -1,0 +1,10 @@
+^C:\USERS\GOINES\DOCUMENTS\GITHUB\CSC8503\OPENGLRENDERING\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Goines/Documents/GitHub/CSC8503 -BC:/Users/Goines/Documents/GitHub/CSC8503 --check-stamp-file C:/Users/Goines/Documents/GitHub/CSC8503/OpenGLRendering/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

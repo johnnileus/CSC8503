@@ -14,9 +14,9 @@
 #include <iostream>
 #include <chrono>
 #include <sstream>
-#include "F:/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Vector.h"
-#include "F:/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Quaternion.h"
-#include "F:/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Plane.h"
-#include "F:/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/Matrix.h"
-#include "F:/CSC8503 Code 2024/CSC8503/../NCLCoreClasses/GameTimer.h"
+#include "C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/../NCLCoreClasses/Vector.h"
+#include "C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/../NCLCoreClasses/Quaternion.h"
+#include "C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/../NCLCoreClasses/Plane.h"
+#include "C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/../NCLCoreClasses/Matrix.h"
+#include "C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/../NCLCoreClasses/GameTimer.h"
 #endif // __cplusplus
