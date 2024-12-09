@@ -1,0 +1,3 @@
+issues:
+- objects dont rotate after colliding
+- simulation lags when lots of objects are colliding
