@@ -291,6 +291,7 @@ public:
 	}
 
 };
+
 void TestPushdownAutomata(Window* w) {
 	PushdownMachine machine(new IntroScreen());
 	while (w->UpdateWindow()) {
@@ -300,6 +301,60 @@ void TestPushdownAutomata(Window* w) {
 		}
 	}
 }
+
+class TestPacketReceiver : public PacketReceiver {
+public:
+	TestPacketReceiver(std::string name) {
+		this->name = name;
+	}
+
+	void ReceivePacket(int type, GamePacket* payload, int source) {
+		if (type == String_Message) {
+			StringPacket* realPacket = (StringPacket*)payload;
+			std::string msg = realPacket->GetStringFromData();
+			std::cout << name << " received message: " << msg << std::endl;
+		}
+	}
+
+protected:
+	std::string name;
+};
+
+
+void TestNetworking() {
+	NetworkBase::Initialise();
+
+	TestPacketReceiver serverReceiver("Server");
+	TestPacketReceiver clientReceiver("Client");
+
+	int port = NetworkBase::GetDefaultPort();
+
+	GameServer* server = new GameServer(port, 1);
+	GameClient* client = new GameClient();
+
+	server->RegisterPacketHandler(String_Message, &serverReceiver);
+	client->RegisterPacketHandler(String_Message, &clientReceiver);
+
+	bool canConnect = client->Connect(127, 0, 0, 1, port);
+
+	for (int i = 0; i < 100; ++i) {
+		StringPacket s = StringPacket("Server says hello! " + std::to_string(i));
+		server->SendGlobalPacket(s);
+
+		StringPacket p = StringPacket("Client says hello! " + std::to_string(i));
+		client->SendPacket(
+			p
+		);
+
+		server->UpdateServer();
+		client->UpdateClient();
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	}
+
+	NetworkBase::Destroy();
+}
+
 
 
 /*
@@ -318,6 +373,7 @@ int main() {
 	//TestBehaviourTree();
 	//TestStateMachine();
 	TestPathfinding();
+	TestNetworking();
 	WindowInitialisation initInfo;
 	initInfo.width		= 1280;
 	initInfo.height		= 720;
@@ -328,7 +384,7 @@ int main() {
 	if (!w->HasInitialised()) {
 		return -1;
 	}	
-	TestPushdownAutomata(w);
+	//TestPushdownAutomata(w);
 
 	w->ShowOSPointer(false);
 	w->LockMouseToWindow(true);
