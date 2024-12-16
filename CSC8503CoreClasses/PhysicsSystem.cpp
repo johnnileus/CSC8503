@@ -269,7 +269,7 @@ void PhysicsSystem::ImpulseResolveCollision(
 		Vector::Cross(relativeB, p.normal), relativeB);
 	float angularEffect = Vector::Dot(inertiaA + inertiaB, p.normal);
 
-	float cRestitution = 0.66f; // disperse some kinetic energy
+	float cRestitution = 0.2f; // disperse some kinetic energy
 
 	float j = (-(1.0f + cRestitution) * impulseForce) /
 		(totalMass + angularEffect);

@@ -98,6 +98,18 @@ void CalculateCameraPosition(PerspectiveCamera* cam, Vector3 pos, float dist) {
 	cam->SetPosition(newDir + pos);
 
 }
+void TutorialGame::CheckIfPlayerGrounded() {
+	Ray ray = Ray(player->GetGameObject()->GetTransform().GetPosition(), Vector3(0, -1, 0));
+	RayCollision closestCollision;
+	player->SetGrounded(false);
+	if (world->Raycast(ray, closestCollision, true, player->GetGameObject())) {
+		if (closestCollision.rayDistance < 1.2f) {
+			player->SetGrounded(true);
+			Debug::DrawLine(player->GetGameObject()->GetTransform().GetPosition(), closestCollision.collidedAt, Vector4(.6f, 1, .6f, .5f), .1f);
+		}
+		
+	}
+}
 
 void TutorialGame::UpdateGame(float dt) {
 	if (!inSelectionMode) {
@@ -157,6 +169,7 @@ void TutorialGame::UpdateGame(float dt) {
 	MoveSelectedObject();
 
 	player->UpdatePlayer(dt);
+	CheckIfPlayerGrounded();
 
 	world->UpdateWorld(dt);
 	renderer->Update(dt);

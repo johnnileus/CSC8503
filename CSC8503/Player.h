@@ -5,6 +5,7 @@
 #include "Vector.h"
 #include "PhysicsObject.h"
 #include "Camera.h"
+#include "Ray.h"
 #include <math.h>
 
 
@@ -26,10 +27,13 @@ namespace NCL {
 				activeController = &c;
 			}
 
+			void SetGrounded(bool g) { grounded = g; }
+
 		protected:
 			GameObject* gameObject;
 			const Controller* activeController = nullptr;
 			PerspectiveCamera* camera;
+			bool grounded;
 
 		};
 	}

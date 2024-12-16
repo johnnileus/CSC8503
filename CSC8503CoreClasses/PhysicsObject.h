@@ -70,7 +70,7 @@ namespace NCL {
 			Transform*		transform;
 
 			float inverseMass;
-			float elasticity;
+			float elasticity = 0.0f;
 			float friction;
 
 			//linear stuff
