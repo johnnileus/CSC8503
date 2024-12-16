@@ -162,8 +162,7 @@ void TutorialGame::UpdateGame(float dt) {
 	renderer->Update(dt);
 	physics->Update(dt);
 
-	world->GetMainCamera().SetPosition(player->GetGameObject()->GetTransform().GetPosition());
-
+	//calculate position of camera for third person perspective
 	CalculateCameraPosition(&world->GetMainCamera(), player->GetGameObject()->GetTransform().GetPosition(), 15.0f);
 
 	renderer->Render();
@@ -357,14 +356,14 @@ GameObject* TutorialGame::AddSphereToWorld(const Vector3& position, float radius
 GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
 	GameObject* model = new GameObject();
 	Vector3 size = Vector3(1.0f, 1.0f, 1.0f);
-	AABBVolume* volume = new AABBVolume(size);
+	SphereVolume* volume = new SphereVolume(1.0f);
 	model->SetBoundingVolume((CollisionVolume*)volume);
 
 	model->GetTransform()
-		.SetPosition({0.0f,0.0f,0.0f})
+		.SetPosition({0.0f,-5.0f,0.0f})
 		.SetScale(size * 2.0f);
 
-	model->SetRenderObject(new RenderObject(&model->GetTransform(), cubeMesh, basicTex, basicShader));
+	model->SetRenderObject(new RenderObject(&model->GetTransform(), catMesh, basicTex, basicShader));
 	model->SetPhysicsObject(new PhysicsObject(&model->GetTransform(), model->GetBoundingVolume()));
 
 	model->GetPhysicsObject()->SetInverseMass(1.0f);
