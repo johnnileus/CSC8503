@@ -373,7 +373,7 @@ int main() {
 	//TestBehaviourTree();
 	//TestStateMachine();
 	TestPathfinding();
-	TestNetworking();
+	//TestNetworking();
 	WindowInitialisation initInfo;
 	initInfo.width		= 1280;
 	initInfo.height		= 720;
@@ -385,7 +385,7 @@ int main() {
 		return -1;
 	}	
 	//TestPushdownAutomata(w);
-
+	
 	w->ShowOSPointer(false);
 	w->LockMouseToWindow(true);
 

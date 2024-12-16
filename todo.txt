@@ -2,3 +2,25 @@ issues:
 - objects dont rotate after colliding
 - simulation lags when lots of objects are colliding
 - do obb
+
+
+features to make:
+	PHYSICS
+		Player Movement
+		AABB and Sphere Collisions
+		OBB collisions
+		Capsule collisions
+		Plane collisions
+		Raycasting
+		Constraints
+	AI
+		Menu
+		AI enemy
+		Pathfinding
+	NETWORKING
+		Client/server or peer-to-peer
+		Send highscore
+		Send position of other players, render as a ghost
+
+
+		

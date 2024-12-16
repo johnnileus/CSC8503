@@ -38,6 +38,10 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 	controller.MapAxis(3, "XLook");
 	controller.MapAxis(4, "YLook");
 
+	player = new Player();
+	player->SetController(controller);
+	player->SetCameraObject(&world->GetMainCamera());
+
 	InitialiseAssets();
 }
 
@@ -79,6 +83,20 @@ TutorialGame::~TutorialGame()	{
 	delete physics;
 	delete renderer;
 	delete world;
+}
+
+void CalculateCameraPosition(PerspectiveCamera* cam, Vector3 pos, float dist) {
+
+	float yaw = cam->GetYaw();
+	float rot = cam->GetPitch();
+
+	Matrix3 yawMat = Matrix::RotationMatrix3x3(yaw, Vector3(0, 1, 0));
+	Matrix3 rotMat = Matrix::RotationMatrix3x3(rot, Vector3(1, 0, 0));
+
+	Vector3 newDir = yawMat * rotMat * Vector3(0, 0, dist);
+
+	cam->SetPosition(newDir + pos);
+
 }
 
 void TutorialGame::UpdateGame(float dt) {
@@ -138,9 +156,15 @@ void TutorialGame::UpdateGame(float dt) {
 	SelectObject();
 	MoveSelectedObject();
 
+	player->UpdatePlayer(dt);
+
 	world->UpdateWorld(dt);
 	renderer->Update(dt);
 	physics->Update(dt);
+
+	world->GetMainCamera().SetPosition(player->GetGameObject()->GetTransform().GetPosition());
+
+	CalculateCameraPosition(&world->GetMainCamera(), player->GetGameObject()->GetTransform().GetPosition(), 15.0f);
 
 	renderer->Render();
 	Debug::UpdateRenderables(dt);
@@ -265,12 +289,13 @@ void TutorialGame::InitWorld() {
 	world->ClearAndErase();
 	physics->Clear();
 
-	InitMixedGridWorld(15, 15, 3.5f, 3.5f);
+	//InitMixedGridWorld(15, 15, 3.5f, 3.5f);
 
 
-	InitGameExamples();
+	//InitGameExamples();
 	InitDefaultFloor();
-	BridgeConstraintTest();
+	//BridgeConstraintTest();
+	CreateObjectToPlayer(player);
 
 }
 
@@ -327,6 +352,27 @@ GameObject* TutorialGame::AddSphereToWorld(const Vector3& position, float radius
 	world->AddGameObject(sphere);
 
 	return sphere;
+}
+
+GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
+	GameObject* model = new GameObject();
+	Vector3 size = Vector3(1.0f, 1.0f, 1.0f);
+	AABBVolume* volume = new AABBVolume(size);
+	model->SetBoundingVolume((CollisionVolume*)volume);
+
+	model->GetTransform()
+		.SetPosition({0.0f,0.0f,0.0f})
+		.SetScale(size * 2.0f);
+
+	model->SetRenderObject(new RenderObject(&model->GetTransform(), cubeMesh, basicTex, basicShader));
+	model->SetPhysicsObject(new PhysicsObject(&model->GetTransform(), model->GetBoundingVolume()));
+
+	model->GetPhysicsObject()->SetInverseMass(1.0f);
+	model->GetPhysicsObject()->InitCubeInertia();
+
+	world->AddGameObject(model);
+	plr->SetGameObject(model);
+	return model;
 }
 
 GameObject* TutorialGame::AddCubeToWorld(const Vector3& position, Vector3 dimensions, float inverseMass) {
@@ -532,7 +578,7 @@ line - after the third, they'll be able to twist under torque aswell.
 
 void TutorialGame::MoveSelectedObject() {
 	Debug::Print("Click Force:" + std::to_string(forceMagnitude), Vector2(5, 90));
-	forceMagnitude += Window::GetMouse()->GetWheelMovement() * 100.0f;
+	forceMagnitude += Window::GetMouse()->GetWheelMovement() * 10.0f;
 
 	if (!selectionObject) {
 		return;//we haven't selected anything!

@@ -8,6 +8,7 @@
 #include "PhysicsSystem.h"
 
 #include "StateGameObject.h"
+#include "Player.h"
 
 namespace NCL {
 	namespace CSC8503 {
@@ -44,6 +45,8 @@ namespace NCL {
 			void DebugObjectMovement();
 			void LockedObjectMovement();
 
+			GameObject* CreateObjectToPlayer(Player* plr);
+
 			GameObject* AddFloorToWorld(const Vector3& position);
 			GameObject* AddSphereToWorld(const Vector3& position, float radius, float inverseMass = 10.0f);
 			GameObject* AddCubeToWorld(const Vector3& position, Vector3 dimensions, float inverseMass = 10.0f);
@@ -64,6 +67,8 @@ namespace NCL {
 			GameWorld*			world;
 
 			KeyboardMouseController controller;
+
+			Player* player;
 
 			bool useGravity;
 			bool inSelectionMode;
