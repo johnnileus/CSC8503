@@ -204,6 +204,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/CSC8503.dir/Release/cmake_pch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\GameTechRenderer.h" />
+    <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\MenuAutomata.h" />
     <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\NetworkPlayer.h" />
     <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\NetworkedGame.h" />
     <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Player.h" />
@@ -214,6 +215,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/CMakeFiles/CSC8503.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Main.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/CMakeFiles/CSC8503.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/CMakeFiles/CSC8503.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\MenuAutomata.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/CMakeFiles/CSC8503.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Goines/Documents/GitHub/CSC8503/CSC8503/CMakeFiles/CSC8503.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>

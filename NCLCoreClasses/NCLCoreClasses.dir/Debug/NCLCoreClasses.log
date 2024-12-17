@@ -1,16 +1,31 @@
-﻿  Camera.cpp
-  Frustum.cpp
-  KeyboardMouseController.cpp
+﻿  Building Custom Rule C:/Users/Goines/Documents/GitHub/CSC8503/NCLCoreClasses/CMakeLists.txt
+  cmake_pch.cxx
+  Assets.cpp
+  SimpleFont.cpp
+  TextureLoader.cpp
+  TextureWriter.cpp
   Maths.cpp
-  Mesh.cpp
-  MeshAnimation.cpp
-  Mouse.cpp
-  MshLoader.cpp
+  Plane.cpp
+  Frustum.cpp
   Quaternion.cpp
+  MeshAnimation.cpp
+  Mesh.cpp
+  MshLoader.cpp
+  MeshMaterial.cpp
   RendererBase.cpp
+  Shader.cpp
+  Texture.cpp
+  Camera.cpp
+  GameTimer.cpp
+  Keyboard.cpp
+  Mouse.cpp
+  Window.cpp
+  Generating Code...
+  Compiling...
+  Controller.cpp
+  KeyboardMouseController.cpp
   Win32Keyboard.cpp
   Win32Mouse.cpp
   Win32Window.cpp
-  Window.cpp
   Generating Code...
   NCLCoreClasses.vcxproj -> C:\Users\Goines\Documents\GitHub\CSC8503\NCLCoreClasses\Debug\NCLCoreClasses.lib

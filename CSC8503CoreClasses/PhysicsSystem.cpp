@@ -270,7 +270,7 @@ void PhysicsSystem::ImpulseResolveCollision(
 	float angularEffect = Vector::Dot(inertiaA + inertiaB, p.normal);
 
 
-	//find average elasticity for cRestitution
+	//find average elasticity for restitution
 	float elasticityA = physA->GetElasticity();
 	float elasticityB = physB->GetElasticity();
 

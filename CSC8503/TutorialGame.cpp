@@ -10,6 +10,7 @@
 
 
 
+
 using namespace NCL;
 using namespace CSC8503;
 
@@ -112,74 +113,115 @@ void TutorialGame::CheckIfPlayerGrounded() {
 }
 
 void TutorialGame::UpdateGame(float dt) {
-	if (!inSelectionMode) {
-		world->GetMainCamera().UpdateCamera(dt);
-	}
-	if (lockedObject != nullptr) {
-		Vector3 objPos = lockedObject->GetTransform().GetPosition();
-		Vector3 camPos = objPos + lockedOffset;
 
-		Matrix4 temp = Matrix::View(camPos, objPos, Vector3(0,1,0));
-
-		Matrix4 modelMat = Matrix::Inverse(temp);
-
-		Quaternion q(modelMat);
-		Vector3 angles = q.ToEuler(); //nearly there now!
-
-		world->GetMainCamera().SetPosition(camPos);
-		world->GetMainCamera().SetPitch(angles.x);
-		world->GetMainCamera().SetYaw(angles.y);
-	}
-
-	UpdateKeys();
-
-	if (useGravity) {
-		Debug::Print("(G)ravity on", Vector2(5, 95), Debug::RED);
-	}
-	else {
-		Debug::Print("(G)ravity off", Vector2(5, 95), Debug::RED);
-	}
-	//This year we can draw debug textures as well!
-	//Debug::DrawTex(*basicTex, Vector2(10, 10), Vector2(5, 5), Debug::MAGENTA);
-
-	RayCollision closestCollision;
-	if (Window::GetKeyboard()->KeyPressed(KeyCodes::K) && selectionObject) {
-		Vector3 rayPos;
-		Vector3 rayDir;
-
-		rayDir = selectionObject->GetTransform().GetOrientation() * Vector3(0, 0, -1);
-
-		rayPos = selectionObject->GetTransform().GetPosition();
-
-		Ray r = Ray(rayPos, rayDir);
-
-		if (world->Raycast(r, closestCollision, true, selectionObject)) {
-			if (objClosest) {
-				objClosest->GetRenderObject()->SetColour(Vector4(1, 1, 1, 1));
-			}
-			objClosest = (GameObject*)closestCollision.node;
-
-			objClosest->GetRenderObject()->SetColour(Vector4(1, 0, 1, 1));
+	if (Window::GetKeyboard()->KeyPressed(KeyCodes::P)) {
+		gamePaused = !gamePaused;
+		if (gamePaused) {
+			Window::GetWindow()->ShowOSPointer(true);
+			Window::GetWindow()->LockMouseToWindow(false);
+		}
+		else {
+			Window::GetWindow()->ShowOSPointer(false);
+			Window::GetWindow()->LockMouseToWindow(true);
 		}
 	}
 
-	Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
+	if (!gamePaused) {
+		if (!inSelectionMode) {
+			world->GetMainCamera().UpdateCamera(dt);
+		}
 
-	SelectObject();
-	MoveSelectedObject();
+		//menuMachine.Update(dt);
 
-	player->UpdatePlayer(dt);
-	CheckIfPlayerGrounded();
+		//move camera rotation
+		if (lockedObject != nullptr) {
+			Vector3 objPos = lockedObject->GetTransform().GetPosition();
+			Vector3 camPos = objPos + lockedOffset;
 
-	world->UpdateWorld(dt);
-	renderer->Update(dt);
-	physics->Update(dt);
+			Matrix4 temp = Matrix::View(camPos, objPos, Vector3(0, 1, 0));
 
-	//calculate position of camera for third person perspective
-	CalculateCameraPosition(&world->GetMainCamera(), player->GetGameObject()->GetTransform().GetPosition(), 15.0f);
+			Matrix4 modelMat = Matrix::Inverse(temp);
 
-	renderer->Render();
-	Debug::UpdateRenderables(dt);
+			Quaternion q(modelMat);
+			Vector3 angles = q.ToEuler(); //nearly there now!
+
+			world->GetMainCamera().SetPosition(camPos);
+			world->GetMainCamera().SetPitch(angles.x);
+			world->GetMainCamera().SetYaw(angles.y);
+		}
+
+		UpdateKeys();
+
+		if (useGravity) {
+			Debug::Print("(G)ravity on", Vector2(5, 95), Debug::RED);
+		}
+		else {
+			Debug::Print("(G)ravity off", Vector2(5, 95), Debug::RED);
+		}
+		//This year we can draw debug textures as well!
+		//Debug::DrawTex(*basicTex, Vector2(10, 10), Vector2(5, 5), Debug::MAGENTA);
+
+		RayCollision closestCollision;
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::K) && selectionObject) {
+			Vector3 rayPos;
+			Vector3 rayDir;
+
+			rayDir = selectionObject->GetTransform().GetOrientation() * Vector3(0, 0, -1);
+
+			rayPos = selectionObject->GetTransform().GetPosition();
+
+			Ray r = Ray(rayPos, rayDir);
+
+			if (world->Raycast(r, closestCollision, true, selectionObject)) {
+				if (objClosest) {
+					objClosest->GetRenderObject()->SetColour(Vector4(1, 1, 1, 1));
+				}
+				objClosest = (GameObject*)closestCollision.node;
+
+				objClosest->GetRenderObject()->SetColour(Vector4(1, 0, 1, 1));
+			}
+		}
+
+		Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
+
+		SelectObject();
+		MoveSelectedObject();
+
+		player->UpdatePlayer(dt);
+		CheckIfPlayerGrounded();
+
+		world->UpdateWorld(dt);
+		renderer->Update(dt);
+		physics->Update(dt);
+
+		//calculate position of camera for third person perspective
+		CalculateCameraPosition(&world->GetMainCamera(), player->GetGameObject()->GetTransform().GetPosition(), 15.0f);
+
+		renderer->Render();
+		Debug::UpdateRenderables(dt);
+	}
+	else {
+		UpdateKeys();
+
+		Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
+
+		Debug::Print("Main Menu", Vector2(5, 5), Debug::BLUE);
+
+		SelectObject();
+		MoveSelectedObject();
+
+
+		world->UpdateWorld(dt);
+		renderer->Update(dt);
+		physics->Update(dt);
+
+		//calculate position of camera for third person perspective
+		CalculateCameraPosition(&world->GetMainCamera(), player->GetGameObject()->GetTransform().GetPosition(), 15.0f);
+
+		renderer->Render();
+		Debug::UpdateRenderables(dt);
+	}
+	
 }
 
 void TutorialGame::UpdateKeys() {
@@ -214,6 +256,8 @@ void TutorialGame::UpdateKeys() {
 	if (Window::GetKeyboard()->KeyPressed(KeyCodes::F8)) {
 		world->ShuffleObjects(false);
 	}
+
+
 
 	if (lockedObject) {
 		LockedObjectMovement();
@@ -545,7 +589,9 @@ bool TutorialGame::SelectObject() {
 		}
 	}
 	if (inSelectionMode) {
-		Debug::Print("Press Q to change to camera mode!", Vector2(5, 85));
+		if (!gamePaused) {
+			Debug::Print("Press Q to change to camera mode!", Vector2(5, 85));
+		}
 
 		if (Window::GetMouse()->ButtonDown(NCL::MouseButtons::Left)) {
 			if (selectionObject) {	//set colour to deselected;
@@ -578,7 +624,9 @@ bool TutorialGame::SelectObject() {
 		}
 	}
 	else {
-		Debug::Print("Press Q to change to select mode!", Vector2(5, 85));
+		if (!gamePaused) {
+			Debug::Print("Press Q to change to select mode!", Vector2(5, 85));
+		}
 	}
 	return false;
 }
@@ -591,7 +639,10 @@ line - after the third, they'll be able to twist under torque aswell.
 */
 
 void TutorialGame::MoveSelectedObject() {
-	Debug::Print("Click Force:" + std::to_string(forceMagnitude), Vector2(5, 90));
+	
+	if (!gamePaused) {
+		Debug::Print("Click Force:" + std::to_string(forceMagnitude), Vector2(5, 90));
+	}
 	forceMagnitude += Window::GetMouse()->GetWheelMovement() * 10.0f;
 
 	if (!selectionObject) {

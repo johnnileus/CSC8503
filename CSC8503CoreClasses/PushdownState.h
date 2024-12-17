@@ -2,8 +2,7 @@
 
 namespace NCL {
 	namespace CSC8503 {
-		class PushdownState
-		{
+		class PushdownState {
 		public:
 			enum PushdownResult {
 				Push, Pop, NoChange
@@ -15,7 +14,8 @@ namespace NCL {
 			virtual PushdownResult OnUpdate(float dt, PushdownState** pushFunc) = 0;
 			virtual void OnAwake() {}
 			virtual void OnSleep() {}
-			
+
+
 		protected:
 		};
 	}

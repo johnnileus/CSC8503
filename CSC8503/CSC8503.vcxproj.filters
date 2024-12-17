@@ -10,6 +10,9 @@
     <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\MenuAutomata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\NetworkPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -28,6 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\GameTechRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\MenuAutomata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\NetworkPlayer.h">

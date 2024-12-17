@@ -39,6 +39,7 @@ bool PushdownMachine::Update(float dt) {
 			}break;
 		}
 	}
+
 	else {
 		stateStack.push(initialState);
 		activeState = initialState;

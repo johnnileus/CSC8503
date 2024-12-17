@@ -6,12 +6,12 @@ issues:
 
 features to make:
 	PHYSICS
-		Player Movement
-		AABB and Sphere Collisions
+		x Player Movement
+		x AABB and Sphere Collisions
 		OBB collisions
 		Capsule collisions
 		Plane collisions
-		Raycasting
+		x Raycasting
 		Constraints
 	AI
 		Menu

@@ -10,6 +10,8 @@
 #include "StateGameObject.h"
 #include "Player.h"
 
+#include "MenuAutomata.h"
+
 namespace NCL {
 	namespace CSC8503 {
 		class TutorialGame		{
@@ -68,6 +70,10 @@ namespace NCL {
 			PhysicsSystem*		physics;
 			GameWorld*			world;
 
+
+			MenuMachine menuMachine = MenuMachine(new MainMenuState());
+
+
 			KeyboardMouseController controller;
 
 			Player* player;
@@ -98,6 +104,8 @@ namespace NCL {
 			void LockCameraToObject(GameObject* o) {
 				lockedObject = o;
 			}
+
+			bool gamePaused = false;
 
 			GameObject* objClosest = nullptr;
 		};
