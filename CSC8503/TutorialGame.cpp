@@ -378,6 +378,7 @@ GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
 
 	model->SetRenderObject(new RenderObject(&model->GetTransform(), catMesh, basicTex, basicShader));
 	model->SetPhysicsObject(new PhysicsObject(&model->GetTransform(), model->GetBoundingVolume()));
+	model->GetPhysicsObject()->SetElasticity(0.0f);
 
 	model->GetPhysicsObject()->SetInverseMass(1.0f);
 	model->GetPhysicsObject()->InitCubeInertia();
@@ -408,6 +409,7 @@ GameObject* TutorialGame::AddCubeToWorld(const Vector3& position, Vector3 dimens
 	return cube;
 }
 
+//not used
 GameObject* TutorialGame::AddPlayerToWorld(const Vector3& position) {
 	float meshSize		= 1.0f;
 	float inverseMass	= 0.5f;

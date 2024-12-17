@@ -56,6 +56,9 @@ namespace NCL {
 				angularVelocity = v;
 			}
 
+			void SetElasticity(float e) { elasticity = e; }
+			float GetElasticity() { return elasticity; }
+
 			void InitCubeInertia();
 			void InitSphereInertia();
 
@@ -70,7 +73,7 @@ namespace NCL {
 			Transform*		transform;
 
 			float inverseMass;
-			float elasticity = 0.0f;
+			float elasticity = 0.8f;
 			float friction;
 
 			//linear stuff
