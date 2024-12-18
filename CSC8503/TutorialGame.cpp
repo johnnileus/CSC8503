@@ -1,4 +1,5 @@
 #include "TutorialGame.h"
+
 #include "GameWorld.h"
 #include "PhysicsObject.h"
 #include "RenderObject.h"
@@ -7,7 +8,6 @@
 #include "PositionConstraint.h"
 #include "OrientationConstraint.h"
 #include "StateGameObject.h"
-
 
 
 
@@ -38,6 +38,10 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 
 	controller.MapAxis(3, "XLook");
 	controller.MapAxis(4, "YLook");
+
+
+	NetworkBase::Initialise();
+
 
 	player = new Player();
 	player->SetController(controller);
@@ -112,6 +116,62 @@ void TutorialGame::CheckIfPlayerGrounded() {
 	}
 }
 
+void TutorialGame::UpdateConnection() {
+
+	if (connected) {
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::M)) {
+			if (connected) {
+				std::cout << "sending msg\n";
+				StringPacket s = StringPacket("sup");
+
+				if (isServer) {
+					server->SendGlobalPacket(s);
+				}
+				else {
+					client->SendPacket(s);
+				}
+
+			}
+		}
+
+		if (isServer) {
+			server->UpdateServer();
+		}
+		else {
+			client->UpdateClient();
+
+		
+		}
+	}
+	else {
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::Y)) {
+			server = new GameServer(port, 1);
+			connected = true;
+			isServer = true;
+
+			server->RegisterPacketHandler(String_Message, &serverReceiver);
+			std::cout << "created server\n";
+
+
+		}
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::U)) {
+			client = new GameClient();
+			connected = true;
+			isServer = false;
+			std::cout << "bwuh2\n";
+
+			client->RegisterPacketHandler(String_Message, &clientReceiver);
+			std::cout << "bwu2h\n";
+			bool canConnect = client->Connect(127, 0, 0, 1, port);
+
+			std::cout << "joined server\n";
+		}
+	}
+
+	
+	
+}
+
 void TutorialGame::UpdateGame(float dt) {
 
 	if (Window::GetKeyboard()->KeyPressed(KeyCodes::P)) {
@@ -125,6 +185,8 @@ void TutorialGame::UpdateGame(float dt) {
 			Window::GetWindow()->LockMouseToWindow(true);
 		}
 	}
+
+	
 
 	if (!gamePaused) {
 		if (!inSelectionMode) {
@@ -203,9 +265,13 @@ void TutorialGame::UpdateGame(float dt) {
 	else {
 		UpdateKeys();
 
+		UpdateConnection();
+
 		Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
 
-		Debug::Print("Main Menu", Vector2(5, 5), Debug::BLUE);
+		Debug::Print("Main Menu", Vector2(5, 6), Debug::BLUE);
+		Debug::Print("Y to host server", Vector2(5, 12), Debug::CYAN);
+		Debug::Print("U to join server", Vector2(5, 16), Debug::CYAN);
 
 		SelectObject();
 		MoveSelectedObject();
@@ -225,6 +291,9 @@ void TutorialGame::UpdateGame(float dt) {
 }
 
 void TutorialGame::UpdateKeys() {
+
+
+
 	if (Window::GetKeyboard()->KeyPressed(KeyCodes::F1)) {
 		InitWorld(); //We can reset the simulation at any time with F1
 		selectionObject = nullptr;

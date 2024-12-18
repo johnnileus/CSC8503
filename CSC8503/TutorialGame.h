@@ -11,6 +11,9 @@
 #include "Player.h"
 
 #include "MenuAutomata.h"
+#include "TutorialGameNet.h"
+
+
 
 namespace NCL {
 	namespace CSC8503 {
@@ -30,6 +33,8 @@ namespace NCL {
 			void InitWorld();
 
 			void CheckIfPlayerGrounded();
+
+			void UpdateConnection();
 
 			/*
 			These are some of the world/object creation functions I created when testing the functionality
@@ -71,6 +76,18 @@ namespace NCL {
 			GameWorld*			world;
 
 
+			////networking
+			bool connected = false;
+			bool isServer = false;
+		
+			TestPacketReceiver serverReceiver{ "Server" };
+			TestPacketReceiver clientReceiver{ "Client" };
+
+			GameServer* server = nullptr;
+			GameClient* client = nullptr;
+
+			int port = NetworkBase::GetDefaultPort();
+
 			MenuMachine menuMachine = MenuMachine(new MainMenuState());
 
 
@@ -105,10 +122,45 @@ namespace NCL {
 				lockedObject = o;
 			}
 
-			bool gamePaused = false;
+			bool gamePaused = true;
 
 			GameObject* objClosest = nullptr;
 		};
 	}
 }
 
+
+
+//void TestNetworking() {
+//	NetworkBase::Initialise();
+//
+//	TestPacketReceiver serverReceiver("Server");
+//	TestPacketReceiver clientReceiver("Client");
+//
+//	int port = NetworkBase::GetDefaultPort();
+//
+//	GameServer* server = new GameServer(port, 1);
+//	GameClient* client = new GameClient();
+//
+//	server->RegisterPacketHandler(String_Message, &serverReceiver);
+//	client->RegisterPacketHandler(String_Message, &clientReceiver);
+//
+//	bool canConnect = client->Connect(127, 0, 0, 1, port);
+//
+//	for (int i = 0; i < 100; ++i) {
+//		StringPacket s = StringPacket("Server says hello! " + std::to_string(i));
+//		server->SendGlobalPacket(s);
+//
+//		StringPacket p = StringPacket("Client says hello! " + std::to_string(i));
+//		client->SendPacket(
+//			p
+//		);
+//
+//		server->UpdateServer();
+//		client->UpdateClient();
+//
+//		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+//	}
+//
+//	NetworkBase::Destroy();
+//}
