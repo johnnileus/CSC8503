@@ -27,7 +27,7 @@ bool PushdownMachine::Update(float dt) {
 				}
 				else {
 					activeState = stateStack.top();
-					activeState->OnAwake();
+					activeState->OnAwake(this);
 				}					
 			}break;
 			case PushdownState::Push: {
@@ -35,7 +35,7 @@ bool PushdownMachine::Update(float dt) {
 
 				stateStack.push(newState);
 				activeState = newState;
-				activeState->OnAwake();
+				activeState->OnAwake(this);
 			}break;
 		}
 	}
@@ -43,7 +43,7 @@ bool PushdownMachine::Update(float dt) {
 	else {
 		stateStack.push(initialState);
 		activeState = initialState;
-		activeState->OnAwake();
+		activeState->OnAwake(this);
 	}
 	return true;
 }

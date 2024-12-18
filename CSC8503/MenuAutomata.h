@@ -20,8 +20,10 @@ public:
 		return PushdownResult::NoChange;
 	}
 
-	void OnAwake() override {
-		std::cout << "Unpaused\n";
+	void OnAwake(PushdownMachine* inst) override {
+		Window::GetWindow()->ShowOSPointer(false);
+		Window::GetWindow()->LockMouseToWindow(true);
+		inst->SetInMenu(false);
 	}
 protected:
 
@@ -37,8 +39,10 @@ public:
 		}
 		return PushdownResult::NoChange;
 	}
-	void OnAwake() override {
-		std::cout << "Game Paused\n";
+	void OnAwake(PushdownMachine* inst) override {
+		Window::GetWindow()->ShowOSPointer(true);
+		Window::GetWindow()->LockMouseToWindow(false);
+		inst->SetInMenu(true);
 	}
 	
 };
@@ -48,12 +52,9 @@ public:
 
 class MenuMachine : public PushdownMachine {
 public:
-	MenuMachine(PushdownState* initialState) : PushdownMachine(initialState), inMenu(false) {
+	MenuMachine(PushdownState* initialState) : PushdownMachine(initialState) {
 		this->initialState = initialState;
 	}
 
-	void SetInMenu(bool m) { inMenu = m; }
-	bool GetInMenu() { return inMenu; }
-protected:
-	bool inMenu;
+
 };

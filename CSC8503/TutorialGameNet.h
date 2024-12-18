@@ -35,9 +35,11 @@ public:
 
 		if (type == Message) {
 			PositionPacket* realPacket = (PositionPacket*)payload;
-			std::cout << "pos:" << realPacket->pos.x << realPacket->pos.y << realPacket->pos.z << std::endl;
+			plrPos = realPacket->pos;
 		}
 	}
+
+	Vector3 plrPos;
 
 protected:
 	std::string name;
@@ -45,7 +47,8 @@ protected:
 
 class GhostPlayer {
 public:
-	Vector3 position;
+	GameObject* GO;
+
 };
 
 

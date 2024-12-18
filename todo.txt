@@ -23,4 +23,3 @@ features to make:
 		Send position of other players, render as a ghost
 
 
-		

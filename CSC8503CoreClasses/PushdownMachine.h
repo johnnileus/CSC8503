@@ -11,8 +11,10 @@ namespace NCL {
 			~PushdownMachine();
 
 			bool Update(float dt);
-
+			void SetInMenu(bool m) { inMenu = m; }
+			bool GetInMenu() { return inMenu; }
 		protected:
+			bool inMenu;
 			PushdownState* activeState;
 			PushdownState* initialState;
 

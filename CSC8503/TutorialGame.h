@@ -55,6 +55,7 @@ namespace NCL {
 			void LockedObjectMovement();
 
 			GameObject* CreateObjectToPlayer(Player* plr);
+			GameObject* CreateGhost(GhostPlayer* plr);
 
 			GameObject* AddFloorToWorld(const Vector3& position);
 			GameObject* AddSphereToWorld(const Vector3& position, float radius, float inverseMass = 10.0f);
@@ -88,9 +89,9 @@ namespace NCL {
 
 			int port = NetworkBase::GetDefaultPort();
 
+			GhostPlayer ghostPlayer;
+
 			MenuMachine menuMachine = MenuMachine(new MainMenuState());
-
-
 			KeyboardMouseController controller;
 
 			Player* player;
@@ -124,7 +125,7 @@ namespace NCL {
 				lockedObject = o;
 			}
 
-			bool gamePaused = true;
+			
 
 			GameObject* objClosest = nullptr;
 		};

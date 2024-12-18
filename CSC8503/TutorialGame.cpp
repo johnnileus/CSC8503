@@ -42,6 +42,7 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 
 	NetworkBase::Initialise();
 
+	
 
 	player = new Player();
 	player->SetController(controller);
@@ -119,24 +120,21 @@ void TutorialGame::CheckIfPlayerGrounded() {
 void TutorialGame::UpdateConnection() {
 
 	if (connected) {
-		if (Window::GetKeyboard()->KeyPressed(KeyCodes::M)) {
-			
-			std::cout << "sending msg\n";
-			StringPacket s = StringPacket("sup");
-			PositionPacket p = PositionPacket(Vector3(0.1f, 0.2f, 0.3f));
 
-			if (isServer) {
-				server->SendGlobalPacket(s);
-				server->SendGlobalPacket(p);
-			}
-			else {
-				client->SendPacket(s);
-				client->SendPacket(p);
-			}
+		Vector3 posToSend = player->GetGameObject()->GetTransform().GetPosition();
+		PositionPacket p = PositionPacket(posToSend);
 
-			std::cout << std::endl;
+		if (isServer) {
+			server->SendGlobalPacket(p);
+			ghostPlayer.GO->GetTransform().SetPosition(serverReceiver.plrPos);
+		}
+		else {
+			client->SendPacket(p);
+			ghostPlayer.GO->GetTransform().SetPosition(clientReceiver.plrPos);
 
 		}
+
+
 
 		if (isServer) {
 			server->UpdateServer();
@@ -154,9 +152,8 @@ void TutorialGame::UpdateConnection() {
 
 			server->RegisterPacketHandler(String_Message, &serverReceiver);
 			server->RegisterPacketHandler(Message, &serverReceiver);
+			CreateGhost(&ghostPlayer);
 			std::cout << "created server\n";
-
-
 		}
 		if (Window::GetKeyboard()->KeyPressed(KeyCodes::U)) {
 			client = new GameClient();
@@ -166,6 +163,7 @@ void TutorialGame::UpdateConnection() {
 			client->RegisterPacketHandler(String_Message, &clientReceiver);
 			client->RegisterPacketHandler(Message, &clientReceiver);
 			bool canConnect = client->Connect(127, 0, 0, 1, port);
+			CreateGhost(&ghostPlayer);
 
 			std::cout << "joined server\n";
 		}
@@ -178,8 +176,8 @@ void TutorialGame::UpdateConnection() {
 void TutorialGame::UpdateGame(float dt) {
 
 	if (Window::GetKeyboard()->KeyPressed(KeyCodes::P)) {
-		gamePaused = !gamePaused;
-		if (gamePaused) {
+		menuMachine.SetInMenu(!menuMachine.GetInMenu());
+		if (menuMachine.GetInMenu()) {
 			Window::GetWindow()->ShowOSPointer(true);
 			Window::GetWindow()->LockMouseToWindow(false);
 		}
@@ -189,14 +187,14 @@ void TutorialGame::UpdateGame(float dt) {
 		}
 	}
 
-	
+	UpdateConnection();
+	menuMachine.Update(dt);
 
-	if (!gamePaused) {
+	if (!menuMachine.GetInMenu()) {
 		if (!inSelectionMode) {
 			world->GetMainCamera().UpdateCamera(dt);
 		}
 
-		//menuMachine.Update(dt);
 
 		//move camera rotation
 		if (lockedObject != nullptr) {
@@ -252,6 +250,8 @@ void TutorialGame::UpdateGame(float dt) {
 		SelectObject();
 		MoveSelectedObject();
 
+
+
 		player->UpdatePlayer(dt);
 		CheckIfPlayerGrounded();
 
@@ -268,7 +268,7 @@ void TutorialGame::UpdateGame(float dt) {
 	else {
 		UpdateKeys();
 
-		UpdateConnection();
+		
 
 		Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
 
@@ -504,6 +504,30 @@ GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
 	return model;
 }
 
+GameObject* TutorialGame::CreateGhost(GhostPlayer* plr) {
+	GameObject* model = new GameObject();
+	Vector3 size = Vector3(1.0f, 1.0f, 1.0f);
+	SphereVolume* volume = new SphereVolume(1.0f);
+	model->SetBoundingVolume((CollisionVolume*)volume);
+
+	model->GetTransform()
+		.SetPosition({ 0.0f,-5.0f,0.0f })
+		.SetScale(size * 2.0f);
+	RenderObject* cat = new RenderObject(&model->GetTransform(), catMesh, basicTex, basicShader);
+	cat->SetColour({ 0,0,1,1 });
+	model->SetRenderObject(cat);
+	model->SetPhysicsObject(new PhysicsObject(&model->GetTransform(), model->GetBoundingVolume()));
+	model->GetPhysicsObject()->SetElasticity(0.0f);
+
+	model->GetPhysicsObject()->SetInverseMass(1.0f);
+	model->GetPhysicsObject()->InitCubeInertia();
+
+	world->AddGameObject(model);
+	plr->GO = model;
+	return model;
+}
+
+
 GameObject* TutorialGame::AddCubeToWorld(const Vector3& position, Vector3 dimensions, float inverseMass) {
 	GameObject* cube = new GameObject();
 
@@ -661,7 +685,7 @@ bool TutorialGame::SelectObject() {
 		}
 	}
 	if (inSelectionMode) {
-		if (!gamePaused) {
+		if (!menuMachine.GetInMenu()) {
 			Debug::Print("Press Q to change to camera mode!", Vector2(5, 85));
 		}
 
@@ -696,7 +720,7 @@ bool TutorialGame::SelectObject() {
 		}
 	}
 	else {
-		if (!gamePaused) {
+		if (!menuMachine.GetInMenu()) {
 			Debug::Print("Press Q to change to select mode!", Vector2(5, 85));
 		}
 	}
@@ -712,7 +736,7 @@ line - after the third, they'll be able to twist under torque aswell.
 
 void TutorialGame::MoveSelectedObject() {
 	
-	if (!gamePaused) {
+	if (!menuMachine.GetInMenu()) {
 		Debug::Print("Click Force:" + std::to_string(forceMagnitude), Vector2(5, 90));
 	}
 	forceMagnitude += Window::GetMouse()->GetWheelMovement() * 10.0f;

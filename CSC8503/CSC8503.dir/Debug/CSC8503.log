@@ -1,2 +1,9 @@
-﻿  TutorialGame.cpp
+﻿  Main.cpp
+C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Main.cpp(108,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Main.cpp(209,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  MenuAutomata.cpp
+  NetworkPlayer.cpp
+  NetworkedGame.cpp
+  TutorialGame.cpp
+  Generating Code...
   CSC8503.vcxproj -> C:\Users\Goines\Documents\GitHub\CSC8503\x64\Debug\CSC8503.exe
