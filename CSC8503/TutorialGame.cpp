@@ -27,7 +27,7 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 	physics		= new PhysicsSystem(*world);
 
 	forceMagnitude	= 10.0f;
-	useGravity		= false;
+	useGravity		= true;
 	inSelectionMode = false;
 
 	world->GetMainCamera().SetController(controller);
@@ -174,6 +174,9 @@ void TutorialGame::UpdateConnection() {
 }
 
 void TutorialGame::UpdateGame(float dt) {
+
+	maze.TestPathfinding();
+	maze.DisplayPath();
 
 	if (Window::GetKeyboard()->KeyPressed(KeyCodes::P)) {
 		menuMachine.SetInMenu(!menuMachine.GetInMenu());
@@ -489,7 +492,7 @@ GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
 	model->SetBoundingVolume((CollisionVolume*)volume);
 
 	model->GetTransform()
-		.SetPosition({0.0f,-5.0f,0.0f})
+		.SetPosition({0.0f,-15.0f,0.0f})
 		.SetScale(size * 2.0f);
 
 	model->SetRenderObject(new RenderObject(&model->GetTransform(), catMesh, basicTex, basicShader));

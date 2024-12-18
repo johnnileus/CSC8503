@@ -12,6 +12,7 @@
 
 #include "MenuAutomata.h"
 #include "TutorialGameNet.h"
+#include "Maze.h"
 
 
 
@@ -75,6 +76,7 @@ namespace NCL {
 #endif
 			PhysicsSystem*		physics;
 			GameWorld*			world;
+			Maze maze;
 
 
 			////networking

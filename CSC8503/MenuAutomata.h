@@ -13,7 +13,7 @@ using namespace CSC8503;
 class InGameState : public PushdownState {
 public:
 	PushdownResult OnUpdate(float dt, PushdownState** newState) override {
-		if (Window::GetKeyboard()->KeyPressed(KeyCodes::SPACE)) {
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::C)) {
 			return PushdownResult::Pop;
 		}
 
@@ -33,7 +33,7 @@ class MainMenuState : public PushdownState {
 public:
 	PushdownResult OnUpdate(float dt, PushdownState** newState) override {
 
-		if (Window::GetKeyboard()->KeyPressed(KeyCodes::SPACE)) {
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::C)) {
 			*newState = new InGameState();
 			return PushdownResult::Push;
 		}

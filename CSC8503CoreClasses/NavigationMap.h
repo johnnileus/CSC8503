@@ -1,7 +1,6 @@
 #pragma once
 #include "NavigationPath.h"
 namespace NCL {
-	using namespace NCL::Maths;
 	namespace CSC8503 {
 		class NavigationMap
 		{
