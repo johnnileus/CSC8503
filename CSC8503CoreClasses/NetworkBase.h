@@ -4,6 +4,9 @@ struct _ENetHost;
 struct _ENetPeer;
 struct _ENetEvent;
 
+
+
+
 enum BasicNetworkMessages {
 	None,
 	Hello,
@@ -50,6 +53,8 @@ struct StringPacket : public GamePacket {
 		return realString;
 	}
 };
+
+
 
 
 class PacketReceiver {

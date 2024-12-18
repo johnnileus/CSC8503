@@ -120,18 +120,22 @@ void TutorialGame::UpdateConnection() {
 
 	if (connected) {
 		if (Window::GetKeyboard()->KeyPressed(KeyCodes::M)) {
-			if (connected) {
-				std::cout << "sending msg\n";
-				StringPacket s = StringPacket("sup");
+			
+			std::cout << "sending msg\n";
+			StringPacket s = StringPacket("sup");
+			PositionPacket p = PositionPacket(Vector3(0.1f, 0.2f, 0.3f));
 
-				if (isServer) {
-					server->SendGlobalPacket(s);
-				}
-				else {
-					client->SendPacket(s);
-				}
-
+			if (isServer) {
+				server->SendGlobalPacket(s);
+				server->SendGlobalPacket(p);
 			}
+			else {
+				client->SendPacket(s);
+				client->SendPacket(p);
+			}
+
+			std::cout << std::endl;
+
 		}
 
 		if (isServer) {
@@ -139,10 +143,9 @@ void TutorialGame::UpdateConnection() {
 		}
 		else {
 			client->UpdateClient();
-
-		
 		}
 	}
+
 	else {
 		if (Window::GetKeyboard()->KeyPressed(KeyCodes::Y)) {
 			server = new GameServer(port, 1);
@@ -150,6 +153,7 @@ void TutorialGame::UpdateConnection() {
 			isServer = true;
 
 			server->RegisterPacketHandler(String_Message, &serverReceiver);
+			server->RegisterPacketHandler(Message, &serverReceiver);
 			std::cout << "created server\n";
 
 
@@ -158,10 +162,9 @@ void TutorialGame::UpdateConnection() {
 			client = new GameClient();
 			connected = true;
 			isServer = false;
-			std::cout << "bwuh2\n";
 
 			client->RegisterPacketHandler(String_Message, &clientReceiver);
-			std::cout << "bwu2h\n";
+			client->RegisterPacketHandler(Message, &clientReceiver);
 			bool canConnect = client->Connect(127, 0, 0, 1, port);
 
 			std::cout << "joined server\n";
