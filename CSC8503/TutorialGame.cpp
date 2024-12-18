@@ -426,6 +426,9 @@ void TutorialGame::InitWorld() {
 	//InitGameExamples();
 	InitDefaultFloor();
 	//BridgeConstraintTest();
+
+	GenerateMaze();
+
 	CreateObjectToPlayer(player);
 
 }
@@ -485,6 +488,23 @@ GameObject* TutorialGame::AddSphereToWorld(const Vector3& position, float radius
 	return sphere;
 }
 
+void TutorialGame::GenerateMaze() {
+	int w = maze.grid.GetWidth();
+	int h = maze.grid.GetHeight();
+	GridNode* allNodes = maze.grid.GetAllNodes();
+
+	for (int y = 0; y < h; ++y) {
+		for (int x = 0; x < w; ++x) {
+			int ind = (w * y) + x;
+			GridNode node = allNodes[(w * y) + x];
+			char type = allNodes[ind].type;
+			if (type == 'x') {
+				AddWallToWorld(node.position, Vector3(2, 2, 2), 0.0f);
+			}
+		}
+	}
+}
+
 GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
 	GameObject* model = new GameObject();
 	Vector3 size = Vector3(1.0f, 1.0f, 1.0f);
@@ -531,7 +551,7 @@ GameObject* TutorialGame::CreateGhost(GhostPlayer* plr) {
 }
 
 
-GameObject* TutorialGame::AddCubeToWorld(const Vector3& position, Vector3 dimensions, float inverseMass) {
+GameObject* TutorialGame::AddWallToWorld(const Vector3& position, Vector3 dimensions, float inverseMass) {
 	GameObject* cube = new GameObject();
 
 	AABBVolume* volume = new AABBVolume(dimensions);
@@ -650,7 +670,7 @@ void TutorialGame::InitMixedGridWorld(int numRows, int numCols, float rowSpacing
 			Vector3 position = Vector3(x * colSpacing, 10.0f, z * rowSpacing);
 
 			if (rand() % 2) {
-				AddCubeToWorld(position, cubeDims);
+				AddWallToWorld(position, cubeDims);
 			}
 			else {
 				AddSphereToWorld(position, sphereRadius);
@@ -663,7 +683,7 @@ void TutorialGame::InitCubeGridWorld(int numRows, int numCols, float rowSpacing,
 	for (int x = 1; x < numCols+1; ++x) {
 		for (int z = 1; z < numRows+1; ++z) {
 			Vector3 position = Vector3(x * colSpacing, 10.0f, z * rowSpacing);
-			AddCubeToWorld(position, cubeDims, 1.0f);
+			AddWallToWorld(position, cubeDims, 1.0f);
 		}
 	}
 }
@@ -775,15 +795,15 @@ void TutorialGame::BridgeConstraintTest() {
 
 	Vector3 startPos = Vector3(50,100,0);
 
-	GameObject* start = AddCubeToWorld(startPos + Vector3(0, 0, 0),
+	GameObject* start = AddWallToWorld(startPos + Vector3(0, 0, 0),
 		cubeSize, 0);
-	GameObject* end = AddCubeToWorld(startPos + Vector3((numLinks + 2) *
+	GameObject* end = AddWallToWorld(startPos + Vector3((numLinks + 2) *
 		cubeDistance, 0, 0), cubeSize, 0);
 
 	GameObject* previous = start;
 
 	for (int i = 0; i < numLinks; ++i) {
-		GameObject* block = AddCubeToWorld(startPos + Vector3((i + 1) *
+		GameObject* block = AddWallToWorld(startPos + Vector3((i + 1) *
 			cubeDistance, 0, 0), cubeSize, invCubeMass);
 		PositionConstraint* constraint = new PositionConstraint(previous,
 			block, maxDistance);
