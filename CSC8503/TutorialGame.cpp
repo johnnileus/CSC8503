@@ -121,20 +121,21 @@ void TutorialGame::UpdateEnemy(float dt) {
 			RayCollision closestCollision;
 			maze.chasingEnemy = false;
 			if (world->Raycast(ray, closestCollision, true, maze.enemy)) {
-				if (closestCollision.rayDistance < Vector::Length(directionToPlayer) - 1.0f) {
+				Debug::DrawLine(enemyPos, closestCollision.collidedAt, Vector4(1,0,0,1));
+				if (closestCollision.rayDistance < Vector::Length(directionToPlayer) + 1.0f) {
 					Debug::DrawLine(plrPos, enemyPos);
 					maze.chasingEnemy = true;
 				}
 			}
 
 
-
-			if (false) {
-				//maze.pathFound = false;
-				//generatedMaze = false;
-				//Vector3 dirToPlayer = Vector::Normalise(plrPos - enemyPos);
-				//float nodeSize = maze.grid.getNodeSize();
-				////maze.enemy->GetTransform().SetPosition(enemyPos);
+			//turn into function
+			if (maze.chasingEnemy) {
+				maze.pathFound = false;
+				generatedMaze = false;
+				Vector3 dirToPlayer = Vector::Normalise(plrPos - enemyPos);
+				float nodeSize = maze.grid.getNodeSize();
+				maze.enemy->GetTransform().SetPosition(enemyPos + dirToPlayer * maze.speed * nodeSize * dt);
 			}
 			else {
 				float nodeProgress = std::fmod(maze.progress, 1);
@@ -152,6 +153,16 @@ void TutorialGame::UpdateEnemy(float dt) {
 
 		}
 		else {
+
+			//turn into function
+			if (maze.chasingEnemy) {
+				maze.pathFound = false;
+				generatedMaze = false;
+				Vector3 dirToPlayer = Vector::Normalise(plrPos - enemyPos);
+				float nodeSize = maze.grid.getNodeSize();
+				maze.enemy->GetTransform().SetPosition(enemyPos + dirToPlayer * maze.speed * nodeSize * dt);
+			}
+
 			maze.pathFound = false;
 			generatedMaze = false;
 		}
@@ -347,11 +358,11 @@ void TutorialGame::UpdateGame(float dt) {
 		SelectObject();
 		MoveSelectedObject();
 
-		UpdateEnemy(dt);
+		//UpdateEnemy(dt);
 
 		world->UpdateWorld(dt);
 		renderer->Update(dt);
-		physics->Update(dt);
+		//physics->Update(dt);
 
 		//calculate position of camera for third person perspective
 		CalculateCameraPosition(&world->GetMainCamera(), player->GetGameObject()->GetTransform().GetPosition(), 15.0f);
@@ -560,7 +571,7 @@ GameObject* TutorialGame::AddSphereToWorld(const Vector3& position, float radius
 void TutorialGame::GenerateMaze() {
 	int w = maze.grid.GetWidth();
 	int h = maze.grid.GetHeight();
-	int size = maze.grid.getNodeSize();
+	float size = maze.grid.getNodeSize();
 	GridNode* allNodes = maze.grid.GetAllNodes();
 
 	for (int y = 0; y < h; ++y) {
@@ -569,7 +580,7 @@ void TutorialGame::GenerateMaze() {
 			GridNode node = allNodes[(w * y) + x];
 			char type = allNodes[ind].type;
 			if (type == 'x') {
-				AddWallToWorld(node.position, Vector3(size /2, 2, size/2), 0.0f);
+				AddWallToWorld(node.position, Vector3(size /2, 5, size/2), 0.0f);
 			}
 		}
 	}
@@ -582,7 +593,7 @@ GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
 	model->SetBoundingVolume((CollisionVolume*)volume);
 
 	model->GetTransform()
-		.SetPosition({0.0f,-15.0f,0.0f})
+		.SetPosition({30.0f,-15.0f,-5.0f})
 		.SetScale(size * 2.0f);
 
 	model->SetRenderObject(new RenderObject(&model->GetTransform(), catMesh, basicTex, basicShader));
