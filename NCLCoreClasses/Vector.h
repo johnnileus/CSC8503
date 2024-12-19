@@ -328,5 +328,15 @@ namespace NCL::Maths {
             return output;
         }
 
+        //linear interpolation
+        template <typename T, uint32_t n>
+        constexpr VectorTemplate<T, n> Lerp(const VectorTemplate<T, n>& posA, const VectorTemplate<T, n>& posB, float t) {
+            VectorTemplate<T, n> out;
+            for (int i = 0; i < n; ++i) {
+                out.array[i] = posA.array[i] + t * (posB.array[i] - posA.array[i]);
+            }
+            return out;
+        }
+
     }
 }

@@ -7,11 +7,13 @@
 
 struct PositionPacket : public GamePacket {
 	Vector3 pos;
+	Quaternion rot;
 
-	PositionPacket(const Vector3 p) {
+	PositionPacket(const Vector3 p, const Quaternion r) {
 		type = BasicNetworkMessages::Message;
-		size = sizeof(pos);
+		size = sizeof(Vector3) + sizeof(Quaternion);
 		pos = p;
+		rot = r;
 	}
 	Vector3 getPosFromData() {
 		return pos;
@@ -36,9 +38,11 @@ public:
 		if (type == Message) {
 			PositionPacket* realPacket = (PositionPacket*)payload;
 			plrPos = realPacket->pos;
+			plrRot = realPacket->rot;
 		}
 	}
 
+	Quaternion plrRot;
 	Vector3 plrPos;
 
 protected:
@@ -50,22 +54,3 @@ public:
 	GameObject* GO;
 
 };
-
-
-
-
-//struct StringPacket : public GamePacket {
-//	char stringData[256];
-//
-//	StringPacket(const std::string& message) {
-//		type = BasicNetworkMessages::String_Message;
-//		size = (short)message.length();
-//		memcpy(stringData, message.data(), size);
-//	}
-//
-//	std::string GetStringFromData() {
-//		std::string realString(stringData);
-//		realString.resize(size);
-//		return realString;
-//	}
-//};

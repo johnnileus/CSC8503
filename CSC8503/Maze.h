@@ -16,34 +16,43 @@ namespace NCL {
 		class Maze {
 		public:
 			NavigationGrid grid{ "TestGrid1.txt" };
-			vector<Vector3> testNodes;
+			vector<Vector3> nodes;
+
+			GameObject* enemy;
+
+			bool pathFound = false;
+			bool chasingEnemy = false;
+			int totalNodes = 0;
+			float progress = 0;
+			float speed = 1.0f;
 
 
+			bool FindPath(Vector3 start, Vector3 end) {
 
-
-			void TestPathfinding() {
-
-
-				Vector3 startPos(80, 0, 10);
-				Vector3 endPos(80, 0, 80);
+				nodes.clear();
 				NavigationPath outPath;
-
-				bool found = grid.FindPath(startPos, endPos, outPath);
+				bool found = grid.FindPath(start, end, outPath);
 
 				Vector3 pos;
 				while (outPath.PopWaypoint(pos)) {
-					testNodes.push_back(pos);
+					nodes.push_back(pos);
+					totalNodes = nodes.size();
+					progress = 0;
+					pathFound = true;
 				}
+				return found;
 			}
 
 			void DisplayPath() {
-				for (int i = 1; i < testNodes.size(); ++i) {
-					Vector3 a = testNodes[i - 1];
-					Vector3 b = testNodes[i];
+				for (int i = 1; i < nodes.size(); ++i) {
+					Vector3 a = nodes[i - 1];
+					Vector3 b = nodes[i];
 
 					Debug::DrawLine(a, b, Vector4(0, 1, 0, 1));
 				}
 			}
+
+			
 			
 		protected:
 		};

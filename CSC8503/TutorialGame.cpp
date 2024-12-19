@@ -104,6 +104,66 @@ void CalculateCameraPosition(PerspectiveCamera* cam, Vector3 pos, float dist) {
 	cam->SetPosition(newDir + pos);
 
 }
+
+void TutorialGame::UpdateEnemy(float dt) {
+	Vector3 plrPos = player->GetGameObject()->GetTransform().GetPosition();
+	Vector3 enemyPos = maze.enemy->GetTransform().GetPosition();
+
+	bool generatedMaze = true;
+	if (!maze.pathFound) {
+		generatedMaze =  maze.FindPath(enemyPos, plrPos);
+	}
+	if (generatedMaze) {
+		if (maze.progress < maze.totalNodes - 1) {
+
+			Vector3 directionToPlayer = plrPos - enemyPos;
+			Ray ray = Ray(enemyPos, Vector::Normalise(directionToPlayer));
+			RayCollision closestCollision;
+			maze.chasingEnemy = false;
+			if (world->Raycast(ray, closestCollision, true, maze.enemy)) {
+				if (closestCollision.rayDistance < Vector::Length(directionToPlayer) - 1.0f) {
+					Debug::DrawLine(plrPos, enemyPos);
+					maze.chasingEnemy = true;
+				}
+			}
+
+
+
+			if (false) {
+				//maze.pathFound = false;
+				//generatedMaze = false;
+				//Vector3 dirToPlayer = Vector::Normalise(plrPos - enemyPos);
+				//float nodeSize = maze.grid.getNodeSize();
+				////maze.enemy->GetTransform().SetPosition(enemyPos);
+			}
+			else {
+				float nodeProgress = std::fmod(maze.progress, 1);
+				int currentNode = maze.progress - nodeProgress;
+
+				Vector3 nodePos = maze.nodes[currentNode];
+				Vector3 nextNodePos = maze.nodes[currentNode + 1];
+
+				Vector3 finalPos = Vector::Lerp(nodePos, nextNodePos, nodeProgress);
+				maze.enemy->GetTransform().SetPosition(finalPos + Vector3(0, 1.8f, 0));
+
+				maze.progress += maze.speed * dt;
+			}
+
+
+		}
+		else {
+			maze.pathFound = false;
+			generatedMaze = false;
+		}
+	}
+
+
+
+
+	maze.DisplayPath();
+
+}
+
 void TutorialGame::CheckIfPlayerGrounded() {
 	Ray ray = Ray(player->GetGameObject()->GetTransform().GetPosition(), Vector3(0, -1, 0));
 	RayCollision closestCollision;
@@ -122,15 +182,18 @@ void TutorialGame::UpdateConnection() {
 	if (connected) {
 
 		Vector3 posToSend = player->GetGameObject()->GetTransform().GetPosition();
-		PositionPacket p = PositionPacket(posToSend);
+		Quaternion rotToSend = player->GetGameObject()->GetTransform().GetOrientation();
+		PositionPacket p = PositionPacket(posToSend, rotToSend);
 
 		if (isServer) {
 			server->SendGlobalPacket(p);
 			ghostPlayer.GO->GetTransform().SetPosition(serverReceiver.plrPos);
+			ghostPlayer.GO->GetTransform().SetOrientation(serverReceiver.plrRot);
 		}
 		else {
 			client->SendPacket(p);
 			ghostPlayer.GO->GetTransform().SetPosition(clientReceiver.plrPos);
+			ghostPlayer.GO->GetTransform().SetOrientation(clientReceiver.plrRot);
 
 		}
 
@@ -175,7 +238,6 @@ void TutorialGame::UpdateConnection() {
 
 void TutorialGame::UpdateGame(float dt) {
 
-	maze.TestPathfinding();
 	maze.DisplayPath();
 
 	if (Window::GetKeyboard()->KeyPressed(KeyCodes::P)) {
@@ -192,6 +254,7 @@ void TutorialGame::UpdateGame(float dt) {
 
 	UpdateConnection();
 	menuMachine.Update(dt);
+
 
 	if (!menuMachine.GetInMenu()) {
 		if (!inSelectionMode) {
@@ -253,6 +316,7 @@ void TutorialGame::UpdateGame(float dt) {
 		SelectObject();
 		MoveSelectedObject();
 
+		UpdateEnemy(dt);
 
 
 		player->UpdatePlayer(dt);
@@ -278,10 +342,12 @@ void TutorialGame::UpdateGame(float dt) {
 		Debug::Print("Main Menu", Vector2(5, 6), Debug::BLUE);
 		Debug::Print("Y to host server", Vector2(5, 12), Debug::CYAN);
 		Debug::Print("U to join server", Vector2(5, 16), Debug::CYAN);
+		Debug::Print("C to unpause", Vector2(5, 92), Debug::GREEN);
 
 		SelectObject();
 		MoveSelectedObject();
 
+		UpdateEnemy(dt);
 
 		world->UpdateWorld(dt);
 		renderer->Update(dt);
@@ -293,6 +359,8 @@ void TutorialGame::UpdateGame(float dt) {
 		renderer->Render();
 		Debug::UpdateRenderables(dt);
 	}
+
+
 	
 }
 
@@ -430,6 +498,7 @@ void TutorialGame::InitWorld() {
 	GenerateMaze();
 
 	CreateObjectToPlayer(player);
+	CreateObjectToEnemy();
 
 }
 
@@ -491,6 +560,7 @@ GameObject* TutorialGame::AddSphereToWorld(const Vector3& position, float radius
 void TutorialGame::GenerateMaze() {
 	int w = maze.grid.GetWidth();
 	int h = maze.grid.GetHeight();
+	int size = maze.grid.getNodeSize();
 	GridNode* allNodes = maze.grid.GetAllNodes();
 
 	for (int y = 0; y < h; ++y) {
@@ -499,7 +569,7 @@ void TutorialGame::GenerateMaze() {
 			GridNode node = allNodes[(w * y) + x];
 			char type = allNodes[ind].type;
 			if (type == 'x') {
-				AddWallToWorld(node.position, Vector3(2, 2, 2), 0.0f);
+				AddWallToWorld(node.position, Vector3(size /2, 2, size/2), 0.0f);
 			}
 		}
 	}
@@ -524,6 +594,29 @@ GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
 
 	world->AddGameObject(model);
 	plr->SetGameObject(model);
+	return model;
+}
+
+GameObject* TutorialGame::CreateObjectToEnemy() {
+	GameObject* model = new GameObject();
+	Vector3 size = Vector3(1.0f, 1.0f, 1.0f);
+	SphereVolume* volume = new SphereVolume(1.0f);
+	model->SetBoundingVolume((CollisionVolume*)volume);
+
+	model->GetTransform()
+		.SetPosition({ 40.0f,-15.0f,40.0f })
+		.SetScale(size * 2.0f);
+	RenderObject* enemy = new RenderObject(&model->GetTransform(), enemyMesh, basicTex, basicShader);
+	enemy->SetColour({ 1,0,0,1 });
+	model->SetRenderObject(enemy);
+	model->SetPhysicsObject(new PhysicsObject(&model->GetTransform(), model->GetBoundingVolume()));
+	model->GetPhysicsObject()->SetElasticity(0.0f);
+
+	model->GetPhysicsObject()->SetInverseMass(1.0f);
+	model->GetPhysicsObject()->InitCubeInertia();
+
+	world->AddGameObject(model);
+	maze.enemy = model;
 	return model;
 }
 
@@ -708,9 +801,7 @@ bool TutorialGame::SelectObject() {
 		}
 	}
 	if (inSelectionMode) {
-		if (!menuMachine.GetInMenu()) {
-			Debug::Print("Press Q to change to camera mode!", Vector2(5, 85));
-		}
+
 
 		if (Window::GetMouse()->ButtonDown(NCL::MouseButtons::Left)) {
 			if (selectionObject) {	//set colour to deselected;
@@ -742,11 +833,7 @@ bool TutorialGame::SelectObject() {
 			}
 		}
 	}
-	else {
-		if (!menuMachine.GetInMenu()) {
-			Debug::Print("Press Q to change to select mode!", Vector2(5, 85));
-		}
-	}
+
 	return false;
 }
 

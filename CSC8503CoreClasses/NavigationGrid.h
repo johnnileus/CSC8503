@@ -37,6 +37,9 @@ namespace NCL {
 
 			int GetWidth() { return gridWidth; }
 			int GetHeight() { return gridHeight; }
+
+			int getNodeSize() { return nodeSize; }
+
 			GridNode* GetAllNodes() {
 				return allNodes;
 			}

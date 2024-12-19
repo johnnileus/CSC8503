@@ -56,8 +56,10 @@ namespace NCL {
 			void LockedObjectMovement();
 
 			GameObject* CreateObjectToPlayer(Player* plr);
+			GameObject* CreateObjectToEnemy();
 			GameObject* CreateGhost(GhostPlayer* plr);
 
+			void UpdateEnemy(float dt);
 			void GenerateMaze();
 
 			GameObject* AddFloorToWorld(const Vector3& position);
