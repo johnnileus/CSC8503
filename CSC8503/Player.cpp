@@ -6,10 +6,6 @@ using namespace CSC8503;
 
 #define PI 3.141592
 
-Player::Player() {
-
-}
-
 void Player::UpdatePlayer(float dt) {
 
 
@@ -44,7 +40,7 @@ void Player::UpdatePlayer(float dt) {
 	}
 	//impulse.y += verticalInput * frameSpeed;
 
-	gameObject->GetPhysicsObject()->ApplyLinearImpulse(impulse);
+	GetPhysicsObject()->ApplyLinearImpulse(impulse);
 	//cap speed, make friction
 	
 	//lerp model to forward
@@ -56,13 +52,19 @@ void Player::UpdatePlayer(float dt) {
 
 
 		Quaternion target = Quaternion::EulerAnglesToQuaternion(0, yaw - yawOffset + 180, 0);
-		Quaternion current = gameObject->GetTransform().GetOrientation();
+		Quaternion current = GetTransform().GetOrientation();
 		Quaternion newRot = Quaternion::Lerp(current, target, 10.0f * dt);
 
-		gameObject->GetTransform().SetOrientation(newRot);
+		GetTransform().SetOrientation(newRot);
 
 	}
 	
 
 }
 
+void Player::OnCollisionBegin(GameObject* otherObject)  {
+	if (otherObject->GetName() == "bonus") {
+		IncrementScore(5);
+		otherObject->SetActive(false);
+	}
+}

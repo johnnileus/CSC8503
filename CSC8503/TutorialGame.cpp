@@ -44,7 +44,7 @@ TutorialGame::TutorialGame() : controller(*Window::GetWindow()->GetKeyboard(), *
 
 	
 
-	player = new Player();
+	player = new Player("player");
 	player->SetController(controller);
 	player->SetCameraObject(&world->GetMainCamera());
 
@@ -106,7 +106,7 @@ void CalculateCameraPosition(PerspectiveCamera* cam, Vector3 pos, float dist) {
 }
 
 void TutorialGame::UpdateEnemy(float dt) {
-	Vector3 plrPos = player->GetGameObject()->GetTransform().GetPosition();
+	Vector3 plrPos = player->GetTransform().GetPosition();
 	Vector3 enemyPos = maze.enemy->GetTransform().GetPosition();
 
 	bool generatedMaze = true;
@@ -176,13 +176,13 @@ void TutorialGame::UpdateEnemy(float dt) {
 }
 
 void TutorialGame::CheckIfPlayerGrounded() {
-	Ray ray = Ray(player->GetGameObject()->GetTransform().GetPosition(), Vector3(0, -1, 0));
+	Ray ray = Ray(player->GetTransform().GetPosition(), Vector3(0, -1, 0));
 	RayCollision closestCollision;
 	player->SetGrounded(false);
-	if (world->Raycast(ray, closestCollision, true, player->GetGameObject())) {
+	if (world->Raycast(ray, closestCollision, true, player)) {
 		if (closestCollision.rayDistance < 1.2f) {
 			player->SetGrounded(true);
-			Debug::DrawLine(player->GetGameObject()->GetTransform().GetPosition(), closestCollision.collidedAt, Vector4(.6f, 1, .6f, .5f), .1f);
+			Debug::DrawLine(player->GetTransform().GetPosition(), closestCollision.collidedAt, Vector4(.6f, 1, .6f, .5f), .1f);
 		}
 		
 	}
@@ -192,8 +192,8 @@ void TutorialGame::UpdateConnection() {
 
 	if (connected) {
 
-		Vector3 posToSend = player->GetGameObject()->GetTransform().GetPosition();
-		Quaternion rotToSend = player->GetGameObject()->GetTransform().GetOrientation();
+		Vector3 posToSend = player->GetTransform().GetPosition();
+		Quaternion rotToSend = player->GetTransform().GetOrientation();
 		PositionPacket p = PositionPacket(posToSend, rotToSend);
 
 		if (isServer) {
@@ -338,7 +338,7 @@ void TutorialGame::UpdateGame(float dt) {
 		physics->Update(dt);
 
 		//calculate position of camera for third person perspective
-		CalculateCameraPosition(&world->GetMainCamera(), player->GetGameObject()->GetTransform().GetPosition(), 15.0f);
+		CalculateCameraPosition(&world->GetMainCamera(), player->GetTransform().GetPosition(), 15.0f);
 
 		renderer->Render();
 		Debug::UpdateRenderables(dt);
@@ -365,7 +365,7 @@ void TutorialGame::UpdateGame(float dt) {
 		//physics->Update(dt);
 
 		//calculate position of camera for third person perspective
-		CalculateCameraPosition(&world->GetMainCamera(), player->GetGameObject()->GetTransform().GetPosition(), 15.0f);
+		CalculateCameraPosition(&world->GetMainCamera(), player->GetTransform().GetPosition(), 15.0f);
 
 		renderer->Render();
 		Debug::UpdateRenderables(dt);
@@ -580,32 +580,35 @@ void TutorialGame::GenerateMaze() {
 			GridNode node = allNodes[(w * y) + x];
 			char type = allNodes[ind].type;
 			if (type == 'x') {
-				AddWallToWorld(node.position, Vector3(size /2, 5, size/2), 0.0f);
+				AddCubeToWorld(node.position, Vector3(size /2, 5, size/2), 0.0f);
+			}
+			else {
+				if (std::rand() % 100 < 2) {
+					AddBonusToWorld(node.position + Vector3(0, 3, 0));
+				}
 			}
 		}
 	}
 }
 
 GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
-	GameObject* model = new GameObject();
 	Vector3 size = Vector3(1.0f, 1.0f, 1.0f);
 	SphereVolume* volume = new SphereVolume(1.0f);
-	model->SetBoundingVolume((CollisionVolume*)volume);
+	plr->SetBoundingVolume((CollisionVolume*)volume);
 
-	model->GetTransform()
+	plr->GetTransform()
 		.SetPosition({30.0f,-15.0f,-5.0f})
 		.SetScale(size * 2.0f);
 
-	model->SetRenderObject(new RenderObject(&model->GetTransform(), catMesh, basicTex, basicShader));
-	model->SetPhysicsObject(new PhysicsObject(&model->GetTransform(), model->GetBoundingVolume()));
-	model->GetPhysicsObject()->SetElasticity(0.0f);
+	plr->SetRenderObject(new RenderObject(&plr->GetTransform(), catMesh, basicTex, basicShader));
+	plr->SetPhysicsObject(new PhysicsObject(&plr->GetTransform(), plr->GetBoundingVolume()));
+	plr->GetPhysicsObject()->SetElasticity(0.0f);
 
-	model->GetPhysicsObject()->SetInverseMass(1.0f);
-	model->GetPhysicsObject()->InitCubeInertia();
+	plr->GetPhysicsObject()->SetInverseMass(1.0f);
+	plr->GetPhysicsObject()->InitCubeInertia();
 
-	world->AddGameObject(model);
-	plr->SetGameObject(model);
-	return model;
+	world->AddGameObject(plr);
+	return plr;
 }
 
 GameObject* TutorialGame::CreateObjectToEnemy() {
@@ -655,7 +658,7 @@ GameObject* TutorialGame::CreateGhost(GhostPlayer* plr) {
 }
 
 
-GameObject* TutorialGame::AddWallToWorld(const Vector3& position, Vector3 dimensions, float inverseMass) {
+GameObject* TutorialGame::AddCubeToWorld(const Vector3& position, Vector3 dimensions, float inverseMass) {
 	GameObject* cube = new GameObject();
 
 	AABBVolume* volume = new AABBVolume(dimensions);
@@ -726,16 +729,19 @@ GameObject* TutorialGame::AddEnemyToWorld(const Vector3& position) {
 }
 
 GameObject* TutorialGame::AddBonusToWorld(const Vector3& position) {
-	GameObject* apple = new GameObject();
+	GameObject* apple = new GameObject("bonus");
 
 	SphereVolume* volume = new SphereVolume(0.5f);
 	apple->SetBoundingVolume((CollisionVolume*)volume);
 	apple->GetTransform()
 		.SetScale(Vector3(2, 2, 2))
 		.SetPosition(position);
-
-	apple->SetRenderObject(new RenderObject(&apple->GetTransform(), bonusMesh, nullptr, basicShader));
-	apple->SetPhysicsObject(new PhysicsObject(&apple->GetTransform(), apple->GetBoundingVolume()));
+	RenderObject* renderObject = new RenderObject(&apple->GetTransform(), bonusMesh, nullptr, basicShader);
+	renderObject->SetColour(Vector4(1, 1, 0, 1));
+	apple->SetRenderObject(renderObject);
+	PhysicsObject* physicsObject = new PhysicsObject(&apple->GetTransform(), apple->GetBoundingVolume());
+	physicsObject->SetGravity(false);
+	apple->SetPhysicsObject(physicsObject);
 
 	apple->GetPhysicsObject()->SetInverseMass(1.0f);
 	apple->GetPhysicsObject()->InitSphereInertia();
@@ -774,7 +780,7 @@ void TutorialGame::InitMixedGridWorld(int numRows, int numCols, float rowSpacing
 			Vector3 position = Vector3(x * colSpacing, 10.0f, z * rowSpacing);
 
 			if (rand() % 2) {
-				AddWallToWorld(position, cubeDims);
+				AddCubeToWorld(position, cubeDims);
 			}
 			else {
 				AddSphereToWorld(position, sphereRadius);
@@ -787,7 +793,7 @@ void TutorialGame::InitCubeGridWorld(int numRows, int numCols, float rowSpacing,
 	for (int x = 1; x < numCols+1; ++x) {
 		for (int z = 1; z < numRows+1; ++z) {
 			Vector3 position = Vector3(x * colSpacing, 10.0f, z * rowSpacing);
-			AddWallToWorld(position, cubeDims, 1.0f);
+			AddCubeToWorld(position, cubeDims, 1.0f);
 		}
 	}
 }
@@ -893,15 +899,15 @@ void TutorialGame::BridgeConstraintTest() {
 
 	Vector3 startPos = Vector3(50,100,0);
 
-	GameObject* start = AddWallToWorld(startPos + Vector3(0, 0, 0),
+	GameObject* start = AddCubeToWorld(startPos + Vector3(0, 0, 0),
 		cubeSize, 0);
-	GameObject* end = AddWallToWorld(startPos + Vector3((numLinks + 2) *
+	GameObject* end = AddCubeToWorld(startPos + Vector3((numLinks + 2) *
 		cubeDistance, 0, 0), cubeSize, 0);
 
 	GameObject* previous = start;
 
 	for (int i = 0; i < numLinks; ++i) {
-		GameObject* block = AddWallToWorld(startPos + Vector3((i + 1) *
+		GameObject* block = AddCubeToWorld(startPos + Vector3((i + 1) *
 			cubeDistance, 0, 0), cubeSize, invCubeMass);
 		PositionConstraint* constraint = new PositionConstraint(previous,
 			block, maxDistance);

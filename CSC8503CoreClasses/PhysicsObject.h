@@ -64,6 +64,9 @@ namespace NCL {
 
 			void UpdateInertiaTensor();
 
+			void SetGravity(bool g) { useGravity = g; }
+			bool GetGravity() { return useGravity; }
+
 			Matrix3 GetInertiaTensor() const {
 				return inverseInteriaTensor;
 			}
@@ -85,6 +88,8 @@ namespace NCL {
 			Vector3 torque;
 			Vector3 inverseInertia;
 			Matrix3 inverseInteriaTensor;
+
+			bool useGravity = true;
 		};
 	}
 }

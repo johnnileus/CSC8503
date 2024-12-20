@@ -26,6 +26,7 @@ namespace NCL::CSC8503 {
 			return isActive;
 		}
 
+		void SetActive(bool a) { isActive = a; }
 		Transform& GetTransform() {
 			return transform;
 		}
@@ -39,7 +40,7 @@ namespace NCL::CSC8503 {
 		}
 
 		NetworkObject* GetNetworkObject() const {
-			return networkObject;
+			return networkObject; 
 		}
 
 		void SetRenderObject(RenderObject* newObject) {
@@ -85,6 +86,7 @@ namespace NCL::CSC8503 {
 		bool		isActive;
 		int			worldID;
 		std::string	name;
+
 
 		Vector3 broadphaseAABB;
 	};

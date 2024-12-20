@@ -153,6 +153,7 @@ From this simple mechanism, we we build up gameplay interactions inside the
 OnCollisionBegin / OnCollisionEnd functions (removing health when hit by a 
 rocket launcher, gaining a point when the player hits the gold coin, and so on).
 */
+
 void PhysicsSystem::UpdateCollisionList() {
 	for (std::set<CollisionDetection::CollisionInfo>::iterator i = allCollisions.begin(); i != allCollisions.end(); ) {
 		if ((*i).framesLeft == numCollisionFrames) {
@@ -376,7 +377,7 @@ void PhysicsSystem::IntegrateAccel(float dt) {
 		Vector3 force = object->GetForce();
 		Vector3 accel = force * inverseMass;
 
-		if (applyGravity && inverseMass > 0) {
+		if (applyGravity && inverseMass > 0 && object->GetGravity()) {
 			accel += gravity; // don’t move infinitely heavy things
 		}
 

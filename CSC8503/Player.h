@@ -12,16 +12,14 @@
 
 namespace NCL {
 	namespace CSC8503 {
-		class Player {
+		class Player : public GameObject {
 		public:
-			Player();
+			Player(const std::string& objectName = "") { name = objectName; }
 
 			void UpdatePlayer(float dt);
-			void SetGameObject(GameObject* GO) { gameObject = GO; }
 
 			void SetCameraObject(PerspectiveCamera* cam) { camera = cam; }
 
-			GameObject* GetGameObject() { return gameObject;}
 
 			void SetController(const Controller& c) {
 				activeController = &c;
@@ -29,11 +27,16 @@ namespace NCL {
 
 			void SetGrounded(bool g) { grounded = g; }
 
+			void IncrementScore(int s) { score += s; std::cout << "bwu\n"; }
+			void SetScore(int s) { score = s; }
+
+			virtual void OnCollisionBegin(GameObject* otherObject);
+
 		protected:
-			GameObject* gameObject;
 			const Controller* activeController = nullptr;
 			PerspectiveCamera* camera;
 			bool grounded;
+			int score = 0;
 
 		};
 	}
