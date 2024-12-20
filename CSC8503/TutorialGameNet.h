@@ -15,8 +15,17 @@ struct PositionPacket : public GamePacket {
 		pos = p;
 		rot = r;
 	}
-	Vector3 getPosFromData() {
-		return pos;
+
+
+};
+
+struct HighscorePacket : public GamePacket {
+	int score;
+
+	HighscorePacket(const int s) {
+		type = BasicNetworkMessages::HighScore;
+		size = sizeof(int);
+		score = s;
 	}
 
 };
@@ -28,11 +37,10 @@ public:
 	}
 
 	void ReceivePacket(int type, GamePacket* payload, int source) {
-		std::cout << "message type: " << type << std::endl;
+		//std::cout << "message type: " << type << std::endl;
 		if (type == String_Message) {
 			StringPacket* realPacket = (StringPacket*)payload;
 			std::string msg = realPacket->GetStringFromData();
-			std::cout << name << " received message: " << msg << std::endl;
 		}
 
 		if (type == Message) {
@@ -40,17 +48,21 @@ public:
 			plrPos = realPacket->pos;
 			plrRot = realPacket->rot;
 		}
+		if (type == HighScore) {
+			std::cout << "BWAH\n";
+			HighscorePacket* realPacket = (HighscorePacket*)payload;
+			score = realPacket->score;
+		}
 	}
 
 	Quaternion plrRot;
 	Vector3 plrPos;
+	int score;
 
 protected:
 	std::string name;
 };
 
-class GhostPlayer {
-public:
+struct GhostPlayer {
 	GameObject* GO;
-
 };

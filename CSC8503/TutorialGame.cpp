@@ -194,17 +194,22 @@ void TutorialGame::UpdateConnection() {
 
 		Vector3 posToSend = player->GetTransform().GetPosition();
 		Quaternion rotToSend = player->GetTransform().GetOrientation();
+		int scoreToSend = player->GetScore();
 		PositionPacket p = PositionPacket(posToSend, rotToSend);
+		HighscorePacket h = HighscorePacket(scoreToSend);
 
 		if (isServer) {
 			server->SendGlobalPacket(p);
 			ghostPlayer.GO->GetTransform().SetPosition(serverReceiver.plrPos);
 			ghostPlayer.GO->GetTransform().SetOrientation(serverReceiver.plrRot);
+
+			server->SendGlobalPacket(h);
 		}
 		else {
 			client->SendPacket(p);
 			ghostPlayer.GO->GetTransform().SetPosition(clientReceiver.plrPos);
 			ghostPlayer.GO->GetTransform().SetOrientation(clientReceiver.plrRot);
+			client->SendPacket(h);
 
 		}
 
@@ -226,6 +231,7 @@ void TutorialGame::UpdateConnection() {
 
 			server->RegisterPacketHandler(String_Message, &serverReceiver);
 			server->RegisterPacketHandler(Message, &serverReceiver);
+			server->RegisterPacketHandler(HighScore, &serverReceiver);
 			CreateGhost(&ghostPlayer);
 			std::cout << "created server\n";
 		}
@@ -236,6 +242,7 @@ void TutorialGame::UpdateConnection() {
 
 			client->RegisterPacketHandler(String_Message, &clientReceiver);
 			client->RegisterPacketHandler(Message, &clientReceiver);
+			client->RegisterPacketHandler(HighScore, &clientReceiver);
 			bool canConnect = client->Connect(127, 0, 0, 1, port);
 			CreateGhost(&ghostPlayer);
 
@@ -299,7 +306,11 @@ void TutorialGame::UpdateGame(float dt) {
 			Debug::Print("(G)ravity off", Vector2(5, 95), Debug::RED);
 		}
 
-		Debug::Print("Score: " + std::to_string(player->GetScore()), Vector2(5, 70), Debug::YELLOW);
+		Debug::Print("Score: " + std::to_string(player->GetScore()), Vector2(70, 5), Debug::YELLOW);
+		if (connected) {
+			Debug::Print("P2 Score: " + std::to_string(isServer ? serverReceiver.score: clientReceiver.score), Vector2(70,10), Debug::WHITE);
+
+		}
 
 		//This year we can draw debug textures as well!
 		//Debug::DrawTex(*basicTex, Vector2(10, 10), Vector2(5, 5), Debug::MAGENTA);

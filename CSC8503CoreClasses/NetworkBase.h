@@ -11,6 +11,7 @@ enum BasicNetworkMessages {
 	None,
 	Hello,
 	Message,
+	HighScore,
 	String_Message,
 	Delta_State,	//1 byte per channel since the last state
 	Full_State,		//Full transform etc

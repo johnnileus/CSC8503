@@ -1,18 +1,4 @@
-﻿  Main.cpp
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Maze.h(39,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'Main.cpp')
-  
-  NetworkPlayer.cpp
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Maze.h(39,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'NetworkPlayer.cpp')
-  
-  NetworkedGame.cpp
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Maze.h(39,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'NetworkedGame.cpp')
-  
-  Player.cpp
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Player.cpp(51,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  TutorialGame.cpp
+﻿  TutorialGame.cpp
 C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Maze.h(39,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'TutorialGame.cpp')
   
@@ -20,6 +6,5 @@ C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(137,20): warni
 C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(141,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(142,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(162,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(577,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
+C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(588,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   CSC8503.vcxproj -> C:\Users\Goines\Documents\GitHub\CSC8503\x64\Debug\CSC8503.exe

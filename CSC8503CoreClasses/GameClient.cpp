@@ -35,7 +35,7 @@ void GameClient::UpdateClient() {
         }
         else if (event.type == ENET_EVENT_TYPE_RECEIVE) {
             GamePacket* packet = (GamePacket*)event.packet->data;
-            std::cout << "Client: Packet received..." << std::endl;
+            //std::cout << "Client: Packet received..." << std::endl;
             ProcessPacket(packet);
         }
         enet_packet_destroy(event.packet);
