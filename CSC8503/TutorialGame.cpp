@@ -118,11 +118,14 @@ void TutorialGame::UpdateEnemy(float dt) {
 
 			Vector3 directionToPlayer = plrPos - enemyPos;
 			Ray ray = Ray(enemyPos, Vector::Normalise(directionToPlayer));
+			Debug::DrawLine(enemyPos, enemyPos + Vector::Normalise(directionToPlayer), Debug::RED);
 			RayCollision closestCollision;
 			maze.chasingEnemy = false;
 			if (world->Raycast(ray, closestCollision, true, maze.enemy)) {
 				Debug::DrawLine(enemyPos, closestCollision.collidedAt, Vector4(1,0,0,1));
-				if (closestCollision.rayDistance < Vector::Length(directionToPlayer) + 1.0f) {
+				Vector3 c = closestCollision.collidedAt;
+				float dist = std::sqrt((plrPos.x - c.x) + (plrPos.y - c.y) + (plrPos.z - c.z));
+				if (dist < 1.1f) {
 					Debug::DrawLine(plrPos, enemyPos);
 					maze.chasingEnemy = true;
 				}

@@ -2,9 +2,9 @@
 C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\Maze.h(39,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'TutorialGame.cpp')
   
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(137,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(141,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(142,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(162,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(649,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(140,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(144,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(145,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(165,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Goines\Documents\GitHub\CSC8503\CSC8503\TutorialGame.cpp(652,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   CSC8503.vcxproj -> C:\Users\Goines\Documents\GitHub\CSC8503\x64\Debug\CSC8503.exe
