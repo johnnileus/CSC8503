@@ -574,9 +574,8 @@ void TutorialGame::InitWorld() {
 	//InitMixedGridWorld(15, 15, 3.5f, 3.5f);
 
 
-	//InitGameExamples();
 	InitDefaultFloor();
-	//BridgeConstraintTest();
+	BridgeConstraintTest();
 
 	player = new Player("player");
 	player->SetController(controller);
@@ -994,25 +993,27 @@ void TutorialGame::MoveSelectedObject() {
 }
 
 void TutorialGame::BridgeConstraintTest() {
-	Vector3 cubeSize = Vector3(8, 8, 8);
+	Vector3 cubeSize = Vector3(2, 2, 8);
 
 	float invCubeMass = 5; // how heavy the middle pieces are
-	int numLinks = 10;
-	float maxDistance = 30; // constraint distance
-	float cubeDistance = 20; // distance between links
+	int numLinks = 5;
+	float maxDistance = 8; // constraint distance
+	float cubeDistance = 4; // distance between links
 
-	Vector3 startPos = Vector3(50,100,0);
+	Vector3 startPos = Vector3(-15,-12,-15);
 
 	GameObject* start = AddCubeToWorld(startPos + Vector3(0, 0, 0),
 		cubeSize, 0);
-	GameObject* end = AddCubeToWorld(startPos + Vector3((numLinks + 2) *
-		cubeDistance, 0, 0), cubeSize, 0);
+	Vector3 endPos = Vector3((numLinks + 2) * cubeDistance,
+		(numLinks + 2) * cubeDistance / 2, 0);
+	GameObject* end = AddCubeToWorld(startPos + endPos, cubeSize, 0);
 
 	GameObject* previous = start;
 
 	for (int i = 0; i < numLinks; ++i) {
 		GameObject* block = AddCubeToWorld(startPos + Vector3((i + 1) *
-			cubeDistance, 0, 0), cubeSize, invCubeMass);
+			cubeDistance, (i + 1) *
+			cubeDistance / 2, 0), cubeSize, invCubeMass);
 		PositionConstraint* constraint = new PositionConstraint(previous,
 			block, maxDistance);
 		world->AddConstraint(constraint);
@@ -1022,4 +1023,8 @@ void TutorialGame::BridgeConstraintTest() {
 	PositionConstraint* constraint = new PositionConstraint(previous,
 		end, maxDistance);
 	world->AddConstraint(constraint);
+
+	AddKittenToWorld(endPos + startPos + Vector3(0, 2, 0));
+	totalKittens++;
+
 }
