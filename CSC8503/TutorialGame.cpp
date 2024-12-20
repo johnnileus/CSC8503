@@ -298,6 +298,9 @@ void TutorialGame::UpdateGame(float dt) {
 		else {
 			Debug::Print("(G)ravity off", Vector2(5, 95), Debug::RED);
 		}
+
+		Debug::Print("Score: " + std::to_string(player->GetScore()), Vector2(5, 70), Debug::YELLOW);
+
 		//This year we can draw debug textures as well!
 		//Debug::DrawTex(*basicTex, Vector2(10, 10), Vector2(5, 5), Debug::MAGENTA);
 

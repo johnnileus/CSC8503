@@ -29,6 +29,7 @@ namespace NCL {
 
 			void IncrementScore(int s) { score += s; std::cout << "bwu\n"; }
 			void SetScore(int s) { score = s; }
+			int GetScore() { return score; }
 
 			virtual void OnCollisionBegin(GameObject* otherObject);
 
