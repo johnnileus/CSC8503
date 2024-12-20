@@ -11,7 +11,7 @@ using namespace CSC8503;
 
 class DeadState : public PushdownState {
 public:
-	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead) override {
+	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead, bool collectedCats) override {
 
 		if (Window::GetKeyboard()->KeyPressed(KeyCodes::C)) {
 			return PushdownResult::Pop;
@@ -30,12 +30,37 @@ public:
 
 };
 
+class WinState : public PushdownState {
+public:
+	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead, bool collectedCats) override {
+
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::C)) {
+			return PushdownResult::Pop;
+		}
+		return PushdownResult::NoChange;
+	}
+	void OnAwake(PushdownMachine* inst) override {
+		Window::GetWindow()->ShowOSPointer(true);
+		Window::GetWindow()->LockMouseToWindow(false);
+		inst->SetInMenu(3);
+	}
+
+	void OnSleep(PushdownMachine* inst) override {
+		inst->revivePlayer = true;
+	}
+
+};
+
 class InGameState : public PushdownState {
 public:
-	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead) override {
+	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead, bool collectedCats) override {
 		std::cout << isDead << std::endl;
 		if (isDead) {
 			*newState = new DeadState();
+			return PushdownResult::Push;
+		}
+		if (collectedCats) {
+			*newState = new WinState();
 			return PushdownResult::Push;
 		}
 
@@ -59,7 +84,7 @@ protected:
 
 class MainMenuState : public PushdownState {
 public:
-	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead) override {
+	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead, bool collectedCats) override {
 
 		if (Window::GetKeyboard()->KeyPressed(KeyCodes::C)) {
 			*newState = new InGameState();

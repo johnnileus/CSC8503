@@ -35,6 +35,7 @@ namespace NCL {
 			
 			bool GetDead() { return dead; }
 			void SetDead(bool d) { dead = d; }
+			int kittensCollected = 0;
 
 		protected:
 			const Controller* activeController = nullptr;

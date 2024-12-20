@@ -17,7 +17,7 @@ namespace NCL {
 			void SetIsDead(bool d) { isDead = d; }
 			bool GetIsDead() { return isDead; }
 			bool revivePlayer = false;
-
+			bool collectedCats = false;
 		protected:
 			bool isDead;
 			int inMenu;

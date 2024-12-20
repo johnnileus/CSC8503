@@ -258,15 +258,22 @@ void TutorialGame::UpdateGame(float dt) {
 
 	maze.DisplayPath();
 
+	if (player->kittensCollected == totalKittens) {
+		menuMachine.collectedCats = true;
+	}
 
 	UpdateConnection();
 	menuMachine.Update(dt);
 
 	if (menuMachine.revivePlayer) {
 		menuMachine.revivePlayer = false;
+		player->kittensCollected = 0;
+		totalKittens = 0;
+		menuMachine.collectedCats = 0;
 		InitWorld();
 		player->SetDead(false);
 		menuMachine.SetIsDead(false);
+
 	}
 
 
@@ -307,6 +314,8 @@ void TutorialGame::UpdateGame(float dt) {
 			Debug::Print("P2 Score: " + std::to_string(isServer ? serverReceiver.score: clientReceiver.score), Vector2(70,10), Debug::WHITE);
 
 		}
+
+		Debug::Print("Kittens: " + std::to_string(player->kittensCollected) + "/" + std::to_string(totalKittens), Vector2(70,15), Debug::YELLOW);
 
 		//This year we can draw debug textures as well!
 		//Debug::DrawTex(*basicTex, Vector2(10, 10), Vector2(5, 5), Debug::MAGENTA);
@@ -389,7 +398,33 @@ void TutorialGame::UpdateGame(float dt) {
 
 		Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
 
-		Debug::Print("Dead", Vector2(5, 6), Debug::RED);
+		Debug::Print("Dead, C to restart", Vector2(5, 6), Debug::RED);
+
+
+		SelectObject();
+		MoveSelectedObject();
+
+		//UpdateEnemy(dt);
+
+		world->UpdateWorld(dt);
+		renderer->Update(dt);
+		//physics->Update(dt);
+
+		//calculate position of camera for third person perspective
+		CalculateCameraPosition(&world->GetMainCamera(), player->GetTransform().GetPosition(), 15.0f);
+
+		renderer->Render();
+		Debug::UpdateRenderables(dt);
+	}
+	else if (menuMachine.GetInMenu() == 3) {
+		UpdateKeys();
+
+
+
+		Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
+
+		Debug::Print("Well done!, C to restart", Vector2(5, 6), Debug::CYAN);
+		Debug::Print("Final Score: " + std::to_string(player->GetScore()), Vector2(5, 12), Debug::CYAN);
 
 
 		SelectObject();
@@ -624,8 +659,13 @@ void TutorialGame::GenerateMaze() {
 				AddCubeToWorld(node.position, Vector3(size /2, 5, size/2), 0.0f);
 			}
 			else {
-				if (std::rand() % 100 < 2) {
-					AddBonusToWorld(node.position + Vector3(0, 3, 0));
+				int num = std::rand() % 100;
+				if (num < 2) {
+					AddBonusToWorld(node.position + Vector3(0, 1, 0));
+				}
+				else if (num < 3){
+					AddKittenToWorld(node.position + Vector3(0, 1, 0));
+					totalKittens++;
 				}
 			}
 		}
@@ -779,6 +819,29 @@ GameObject* TutorialGame::AddBonusToWorld(const Vector3& position) {
 		.SetPosition(position);
 	RenderObject* renderObject = new RenderObject(&apple->GetTransform(), bonusMesh, nullptr, basicShader);
 	renderObject->SetColour(Vector4(1, 1, 0, 1));
+	apple->SetRenderObject(renderObject);
+	PhysicsObject* physicsObject = new PhysicsObject(&apple->GetTransform(), apple->GetBoundingVolume());
+	physicsObject->SetGravity(false);
+	apple->SetPhysicsObject(physicsObject);
+
+	apple->GetPhysicsObject()->SetInverseMass(1.0f);
+	apple->GetPhysicsObject()->InitSphereInertia();
+
+	world->AddGameObject(apple);
+
+	return apple;
+}
+
+GameObject* TutorialGame::AddKittenToWorld(const Vector3& position) {
+	GameObject* apple = new GameObject("kitten");
+
+	SphereVolume* volume = new SphereVolume(0.5f);
+	apple->SetBoundingVolume((CollisionVolume*)volume);
+	apple->GetTransform()
+		.SetScale(Vector3(2, 2, 2))
+		.SetPosition(position);
+	RenderObject* renderObject = new RenderObject(&apple->GetTransform(), kittenMesh, nullptr, basicShader);
+	renderObject->SetColour(Vector4(1, 0, 1, 1));
 	apple->SetRenderObject(renderObject);
 	PhysicsObject* physicsObject = new PhysicsObject(&apple->GetTransform(), apple->GetBoundingVolume());
 	physicsObject->SetGravity(false);

@@ -75,6 +75,7 @@ namespace NCL {
 			GameObject* AddPlayerToWorld(const Vector3& position);
 			GameObject* AddEnemyToWorld(const Vector3& position);
 			GameObject* AddBonusToWorld(const Vector3& position);
+			GameObject* AddKittenToWorld(const Vector3& position);
 
 
 			void BridgeConstraintTest();
@@ -88,7 +89,7 @@ namespace NCL {
 			PhysicsSystem*		physics;
 			GameWorld*			world;
 			Maze maze;
-
+			int totalKittens = 0;
 
 			////networking
 			bool connected = false;

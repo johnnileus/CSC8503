@@ -15,7 +15,7 @@ PushdownMachine::~PushdownMachine()
 bool PushdownMachine::Update(float dt) {
 	if (activeState) {
 		PushdownState* newState = nullptr;
-		PushdownState::PushdownResult result = activeState->OnUpdate(dt, &newState, isDead);
+		PushdownState::PushdownResult result = activeState->OnUpdate(dt, &newState, isDead, collectedCats);
 
 		switch (result) {
 			case PushdownState::Pop: {

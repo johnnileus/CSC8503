@@ -71,4 +71,8 @@ void Player::OnCollisionBegin(GameObject* otherObject)  {
 	else if (otherObject->GetName() == "enemy") {
 		SetDead(true);
 	}
+	else if (otherObject->GetName() == "kitten") {
+		kittensCollected += 1;
+		otherObject->SetActive(false);
+	}
 }
