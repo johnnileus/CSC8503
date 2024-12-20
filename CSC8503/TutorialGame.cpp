@@ -258,23 +258,19 @@ void TutorialGame::UpdateGame(float dt) {
 
 	maze.DisplayPath();
 
-	if (Window::GetKeyboard()->KeyPressed(KeyCodes::P)) {
-		menuMachine.SetInMenu(!menuMachine.GetInMenu());
-		if (menuMachine.GetInMenu()) {
-			Window::GetWindow()->ShowOSPointer(true);
-			Window::GetWindow()->LockMouseToWindow(false);
-		}
-		else {
-			Window::GetWindow()->ShowOSPointer(false);
-			Window::GetWindow()->LockMouseToWindow(true);
-		}
-	}
 
 	UpdateConnection();
 	menuMachine.Update(dt);
 
+	if (menuMachine.revivePlayer) {
+		menuMachine.revivePlayer = false;
+		InitWorld();
+		player->SetDead(false);
+		menuMachine.SetIsDead(false);
+	}
 
-	if (!menuMachine.GetInMenu()) {
+
+	if (menuMachine.GetInMenu() == 0) { // in game
 		if (!inSelectionMode) {
 			world->GetMainCamera().UpdateCamera(dt);
 		}
@@ -351,13 +347,15 @@ void TutorialGame::UpdateGame(float dt) {
 		renderer->Update(dt);
 		physics->Update(dt);
 
+		menuMachine.SetIsDead(player->GetDead());
+
 		//calculate position of camera for third person perspective
 		CalculateCameraPosition(&world->GetMainCamera(), player->GetTransform().GetPosition(), 15.0f);
 
 		renderer->Render();
 		Debug::UpdateRenderables(dt);
 	}
-	else {
+	else if (menuMachine.GetInMenu() == 1) { // main menu
 		UpdateKeys();
 
 		
@@ -368,6 +366,31 @@ void TutorialGame::UpdateGame(float dt) {
 		Debug::Print("Y to host server", Vector2(5, 12), Debug::CYAN);
 		Debug::Print("U to join server", Vector2(5, 16), Debug::CYAN);
 		Debug::Print("C to unpause", Vector2(5, 92), Debug::GREEN);
+
+		SelectObject();
+		MoveSelectedObject();
+
+		//UpdateEnemy(dt);
+
+		world->UpdateWorld(dt);
+		renderer->Update(dt);
+		//physics->Update(dt);
+
+		//calculate position of camera for third person perspective
+		CalculateCameraPosition(&world->GetMainCamera(), player->GetTransform().GetPosition(), 15.0f);
+
+		renderer->Render();
+		Debug::UpdateRenderables(dt);
+	}
+	else if (menuMachine.GetInMenu() == 2) {
+		UpdateKeys();
+
+
+
+		Debug::DrawLine(Vector3(), Vector3(0, 100, 0), Vector4(1, 0, 0, 1));
+
+		Debug::Print("Dead", Vector2(5, 6), Debug::RED);
+
 
 		SelectObject();
 		MoveSelectedObject();
@@ -520,6 +543,10 @@ void TutorialGame::InitWorld() {
 	InitDefaultFloor();
 	//BridgeConstraintTest();
 
+	player = new Player("player");
+	player->SetController(controller);
+	player->SetCameraObject(&world->GetMainCamera());
+
 	GenerateMaze();
 
 	CreateObjectToPlayer(player);
@@ -626,7 +653,7 @@ GameObject* TutorialGame::CreateObjectToPlayer(Player* plr) {
 }
 
 GameObject* TutorialGame::CreateObjectToEnemy() {
-	GameObject* model = new GameObject();
+	GameObject* model = new GameObject("enemy");
 	Vector3 size = Vector3(1.0f, 1.0f, 1.0f);
 	SphereVolume* volume = new SphereVolume(1.0f);
 	model->SetBoundingVolume((CollisionVolume*)volume);
@@ -722,7 +749,7 @@ GameObject* TutorialGame::AddEnemyToWorld(const Vector3& position) {
 	float meshSize		= 3.0f;
 	float inverseMass	= 0.5f;
 
-	GameObject* character = new GameObject();
+	GameObject* character = new GameObject("enemy");
 
 	AABBVolume* volume = new AABBVolume(Vector3(0.3f, 0.9f, 0.3f) * meshSize);
 	character->SetBoundingVolume((CollisionVolume*)volume);

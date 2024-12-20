@@ -32,12 +32,17 @@ namespace NCL {
 			int GetScore() { return score; }
 
 			virtual void OnCollisionBegin(GameObject* otherObject);
+			
+			bool GetDead() { return dead; }
+			void SetDead(bool d) { dead = d; }
 
 		protected:
 			const Controller* activeController = nullptr;
 			PerspectiveCamera* camera;
 			bool grounded;
 			int score = 0;
+
+			bool dead = false;
 
 		};
 	}

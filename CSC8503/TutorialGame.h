@@ -109,8 +109,6 @@ namespace NCL {
 
 			Player* player;
 
-			
-
 
 			bool useGravity;
 			bool inSelectionMode;

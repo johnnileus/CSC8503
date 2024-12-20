@@ -15,11 +15,11 @@ PushdownMachine::~PushdownMachine()
 bool PushdownMachine::Update(float dt) {
 	if (activeState) {
 		PushdownState* newState = nullptr;
-		PushdownState::PushdownResult result = activeState->OnUpdate(dt, &newState);
+		PushdownState::PushdownResult result = activeState->OnUpdate(dt, &newState, isDead);
 
 		switch (result) {
 			case PushdownState::Pop: {
-				activeState->OnSleep();
+				activeState->OnSleep(this);
 				delete activeState;
 				stateStack.pop();
 				if (stateStack.empty()) {
@@ -31,7 +31,7 @@ bool PushdownMachine::Update(float dt) {
 				}					
 			}break;
 			case PushdownState::Push: {
-				activeState->OnSleep();		
+				activeState->OnSleep(this);		
 
 				stateStack.push(newState);
 				activeState = newState;
@@ -39,11 +39,13 @@ bool PushdownMachine::Update(float dt) {
 			}break;
 		}
 	}
-
 	else {
 		stateStack.push(initialState);
 		activeState = initialState;
 		activeState->OnAwake(this);
 	}
+
+
+
 	return true;
 }

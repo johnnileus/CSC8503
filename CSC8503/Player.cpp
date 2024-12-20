@@ -63,8 +63,12 @@ void Player::UpdatePlayer(float dt) {
 }
 
 void Player::OnCollisionBegin(GameObject* otherObject)  {
+	std::cout << otherObject->GetName() << std::endl;
 	if (otherObject->GetName() == "bonus") {
 		IncrementScore(5);
 		otherObject->SetActive(false);
+	}
+	else if (otherObject->GetName() == "enemy") {
+		SetDead(true);
 	}
 }

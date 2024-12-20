@@ -9,10 +9,36 @@ using namespace CSC8503;
 
 
 
+class DeadState : public PushdownState {
+public:
+	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead) override {
+
+		if (Window::GetKeyboard()->KeyPressed(KeyCodes::C)) {
+			return PushdownResult::Pop;
+		}
+		return PushdownResult::NoChange;
+	}
+	void OnAwake(PushdownMachine* inst) override {
+		Window::GetWindow()->ShowOSPointer(true);
+		Window::GetWindow()->LockMouseToWindow(false);
+		inst->SetInMenu(2);
+	}
+
+	void OnSleep(PushdownMachine* inst) override {
+		inst->revivePlayer = true;
+	}
+
+};
 
 class InGameState : public PushdownState {
 public:
-	PushdownResult OnUpdate(float dt, PushdownState** newState) override {
+	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead) override {
+		std::cout << isDead << std::endl;
+		if (isDead) {
+			*newState = new DeadState();
+			return PushdownResult::Push;
+		}
+
 		if (Window::GetKeyboard()->KeyPressed(KeyCodes::C)) {
 			return PushdownResult::Pop;
 		}
@@ -21,17 +47,19 @@ public:
 	}
 
 	void OnAwake(PushdownMachine* inst) override {
+		
 		Window::GetWindow()->ShowOSPointer(false);
 		Window::GetWindow()->LockMouseToWindow(true);
-		inst->SetInMenu(false);
+		inst->SetInMenu(0);
 	}
 protected:
 
 };
 
+
 class MainMenuState : public PushdownState {
 public:
-	PushdownResult OnUpdate(float dt, PushdownState** newState) override {
+	PushdownResult OnUpdate(float dt, PushdownState** newState, bool isDead) override {
 
 		if (Window::GetKeyboard()->KeyPressed(KeyCodes::C)) {
 			*newState = new InGameState();
@@ -42,7 +70,7 @@ public:
 	void OnAwake(PushdownMachine* inst) override {
 		Window::GetWindow()->ShowOSPointer(true);
 		Window::GetWindow()->LockMouseToWindow(false);
-		inst->SetInMenu(true);
+		inst->SetInMenu(1);
 	}
 	
 };
@@ -55,6 +83,6 @@ public:
 	MenuMachine(PushdownState* initialState) : PushdownMachine(initialState) {
 		this->initialState = initialState;
 	}
-
+	
 
 };

@@ -11,10 +11,16 @@ namespace NCL {
 			~PushdownMachine();
 
 			bool Update(float dt);
-			void SetInMenu(bool m) { inMenu = m; }
-			bool GetInMenu() { return inMenu; }
+			void SetInMenu(int m) { inMenu = m; }
+			int GetInMenu() { return inMenu; }
+
+			void SetIsDead(bool d) { isDead = d; }
+			bool GetIsDead() { return isDead; }
+			bool revivePlayer = false;
+
 		protected:
-			bool inMenu;
+			bool isDead;
+			int inMenu;
 			PushdownState* activeState;
 			PushdownState* initialState;
 

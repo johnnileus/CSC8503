@@ -37,9 +37,6 @@ c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.d
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\behaviourselector.cpp.obj
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\behavioursequence.h.obj
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\behavioursequence.cpp.obj
-c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\pushdownmachine.h.obj
-c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\pushdownmachine.cpp.obj
-c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\pushdownstate.h.obj
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\pushdownstate.cpp.obj
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\statemachine.h.obj
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\statemachine.cpp.obj
@@ -77,6 +74,9 @@ c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.d
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\enet\protocol.c.obj
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\enet\win32.h.obj
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\enet\win32.c.obj
+c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\pushdownmachine.h.obj
+c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\pushdownmachine.cpp.obj
+c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\pushdownstate.h.obj
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\cmakefiles\generate.stamp
 c:\users\goines\documents\github\csc8503\x64\debug\csc8503coreclasses.lib
 c:\users\goines\documents\github\csc8503\csc8503coreclasses\csc8503coreclasses.dir\debug\csc8503c.74494e63.tlog\cl.command.1.tlog

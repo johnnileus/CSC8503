@@ -24,7 +24,7 @@ namespace NCL {
 			bool chasingEnemy = false;
 			int totalNodes = 0;
 			float progress = 0;
-			float speed = .7f;
+			float speed = .0f;
 
 
 			bool FindPath(Vector3 start, Vector3 end) {
